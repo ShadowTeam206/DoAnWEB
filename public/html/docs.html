@@ -1,0 +1,3404 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI STORE · Tài liệu API</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="../css/dashboard.css" />
+    <link rel="stylesheet" href="../css/docs.css" />
+</head>
+
+<body>
+    <header class="site-header docs-header dashboard-header">
+        <div class="site-header-inner">
+            <a class="brand brand-linklike" href="/" aria-label="AI STORE home">
+                <img class="brand-logo" src="../AI_STORE.png" alt="AI STORE logo" />
+                <div>
+                    <div class="brand-kicker" data-i18n="brandKicker">AI STORE</div>
+                    <div class="brand-name" data-i18n="brandName">AI STORE</div>
+                </div>
+            </a>
+
+            <nav class="site-nav docs-top-nav">
+                <a href="/" data-i18n="navHome">Trang chủ</a>
+                <a href="/dashboard" data-i18n="navConsole">Bảng điều khiển</a>
+                <a href="/models" data-i18n="navModels">Mô hình</a>
+                <a href="/rankings" data-i18n="navRanking">Bảng xếp hạng</a>
+                <a href="/docs" class="is-active" data-i18n="navDocs">Tài liệu</a>
+            </nav>
+
+            <div class="header-actions">
+                <div class="language-switcher">
+                    <button class="ghost-icon-btn" id="languageToggle" type="button" aria-haspopup="true"
+                        aria-expanded="false">文</button>
+                    <div class="language-menu hidden" id="languageMenu">
+                        <button type="button" data-lang="vi">Tiếng Việt</button>
+                        <button type="button" data-lang="en">English</button>
+                        <button type="button" data-lang="zh">中文</button>
+                        <button type="button" data-lang="ja">日本語</button>
+                    </div>
+                </div>
+                <div class="theme-switcher">
+                    <button class="ghost-icon-btn svg-icon-btn" id="themeToggle" type="button" aria-haspopup="true"
+                        aria-expanded="false" aria-label="Theme switcher">
+                        <span class="theme-icon theme-icon-moon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"></path>
+                            </svg>
+                        </span>
+                        <span class="theme-icon theme-icon-sun" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="4"></circle>
+                                <path d="M12 2v2.5"></path>
+                                <path d="M12 19.5V22"></path>
+                                <path d="M4.93 4.93l1.77 1.77"></path>
+                                <path d="M17.3 17.3l1.77 1.77"></path>
+                                <path d="M2 12h2.5"></path>
+                                <path d="M19.5 12H22"></path>
+                                <path d="M4.93 19.07l1.77-1.77"></path>
+                                <path d="M17.3 6.7l1.77-1.77"></path>
+                            </svg>
+                        </span>
+                    </button>
+                    <div class="theme-menu hidden" id="themeMenu">
+                        <button type="button" data-theme="dark">Tối</button>
+                        <button type="button" data-theme="light">Ánh Sáng</button>
+                    </div>
+                </div>
+                <div class="notification-switcher">
+                    <button class="ghost-icon-btn svg-icon-btn" id="notificationToggle" type="button"
+                        aria-haspopup="true" aria-expanded="false" aria-label="Notifications">
+                        <span class="notification-dot"></span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M15 17h5l-1.4-1.4A2 2 0 0 1 18 14.2V11a6 6 0 1 0-12 0v3.2a2 2 0 0 1-.6 1.4L4 17h5">
+                            </path>
+                            <path d="M9 17a3 3 0 0 0 6 0"></path>
+                        </svg>
+                    </button>
+                    <div class="notification-menu hidden" id="notificationMenu">
+                        <div class="notification-header">
+                            <span data-i18n="notificationHeader">Thông báo</span>
+                            <span class="notification-count">01</span>
+                        </div>
+                        <article class="notification-card">
+                            <div class="notification-tag" data-i18n="notificationTag">Docs</div>
+                            <h4 data-i18n="notificationTitle">Tài liệu API đã được đồng bộ</h4>
+                            <p data-i18n="notificationDescription">Toàn bộ phần tham chiếu đang dùng cùng hệ màu và trải nghiệm điều hướng với trang chủ.
+                            </p>
+                            <div class="notification-time" data-i18n="notificationTime">Vừa xong · curated for your workspace</div>
+                        </article>
+                    </div>
+                </div>
+                <button class="nav-login-btn" id="loginTriggerBtn" type="button" onclick="showLoginPanel()" data-i18n="signIn">Đăng
+                    nhập</button>
+                <div class="user-menu-wrap hidden" id="userMenuWrap">
+                    <button class="user-menu-trigger" id="userMenuTrigger" type="button" aria-haspopup="true"
+                        aria-expanded="false" aria-label="User menu">
+                        <span class="user-avatar" id="userAvatar">AI</span>
+                        <span class="user-meta">
+                            <strong id="userDisplayName">Người dùng</strong>
+                            <small id="userDisplayPlan">Tài khoản hệ thống</small>
+                        </span>
+                    </button>
+                    <div class="user-menu-dropdown hidden" id="userMenuDropdown" role="menu">
+                        <button class="user-menu-item" type="button" role="menuitem" data-user-action="profile">
+                            <svg class="user-menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-6 8-6s8 2 8 6"/></svg>
+                            <span data-i18n="navProfile">Hồ sơ</span>
+                        </button>
+                        <button class="user-menu-item user-menu-item-danger" type="button" role="menuitem" data-user-action="logout">
+                            <svg class="user-menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h4"/><path d="M16 8l4 4-4 4"/><path d="M20 12H9"/></svg>
+                            <span data-i18n="navLogout">Đăng xuất</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="docs-mobile-overlay" id="docsMobileOverlay" hidden></div>
+
+    <main class="docs-shell">
+        <section class="docs-hero glass-card">
+            <div class="docs-hero-copy">
+                <div class="docs-breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Trang chủ</a>
+                    <span>/</span>
+                    <span>Tài liệu</span>
+                </div>
+                <span class="docs-kicker">Documentation Center</span>
+                <h1>API Reference cho nền tảng AI hợp nhất</h1>
+                <p>
+                    Tài liệu triển khai đầy đủ theo cấu trúc tham chiếu API để bạn có thể đọc, tra cứu và tích hợp trực
+                    tiếp.
+                </p>
+                <div class="docs-hero-actions">
+                    <a class="primary-btn" href="#section-overview">Xem tổng quan</a>
+                    <a class="secondary-btn" href="#section-chat-completions">Thử Chat Completions</a>
+                </div>
+            </div>
+
+            <div class="docs-hero-card">
+                <div class="docs-hero-card-top">
+                    <span class="method-pill">POST</span>
+                    <button class="endpoint-pill endpoint-copy" type="button" data-copy="/v1/chat/completions">
+                        /v1/chat/completions
+                    </button>
+                </div>
+                <div class="hero-code-window docs-mini-code-window">
+                    <div class="code-section-label">QUICK START</div>
+                    <pre class="code-block themed-code"><code>curl -X POST "https://your-domain/v1/chat/completions" \
+  -H "Authorization: Bearer sk-******" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "gpt-5.4",
+    "messages": [
+      { "role": "system", "content": "You are a helpful assistant." },
+      { "role": "user", "content": "Hello" }
+    ]
+  }'</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <div class="docs-layout">
+            <aside class="docs-sidebar" id="docsSidebar">
+                <div class="docs-sidebar-inner glass-card">
+                    <label class="docs-search-box" for="docsSearchInput">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <circle cx="11" cy="11" r="7"></circle>
+                            <path d="m20 20-3.5-3.5"></path>
+                        </svg>
+                        <input id="docsSearchInput" type="search" placeholder="Tìm endpoint, section, tham số..."
+                            autocomplete="off" />
+                    </label>
+
+                    <div class="docs-nav-group is-open">
+                        <button type="button" class="docs-nav-group-toggle" aria-expanded="true">
+                            <span class="docs-nav-title">Overview</span>
+                            <span class="docs-nav-caret" aria-hidden="true">⌄</span>
+                        </button>
+                        <div class="docs-nav-links">
+                            <a class="docs-nav-link" href="#section-overview">Overview</a>
+                            <a class="docs-nav-link" href="#section-ai-model-apis">AI Model APIs</a>
+                            <a class="docs-nav-link" href="#section-management-apis">Management APIs</a>
+                            <a class="docs-nav-link" href="#section-authentication">Authentication</a>
+                        </div>
+                    </div>
+
+                    <div class="docs-nav-group">
+                        <button type="button" class="docs-nav-group-toggle" aria-expanded="false">
+                            <span class="docs-nav-title">AI Model APIs</span>
+                            <span class="docs-nav-caret" aria-hidden="true">⌄</span>
+                        </button>
+                        <div class="docs-nav-links hidden">
+                            <a class="docs-nav-link" href="#section-model-list">Model List</a>
+                            <a class="docs-nav-link" href="#section-chat-completions">Chat Completions</a>
+                            <a class="docs-nav-link" href="#section-responses">Responses</a>
+                            <a class="docs-nav-link" href="#section-completions">Completions</a>
+                            <a class="docs-nav-link" href="#section-embeddings">Embeddings</a>
+                            <a class="docs-nav-link" href="#section-rerank">Rerank</a>
+                            <a class="docs-nav-link" href="#section-moderations">Moderations</a>
+                            <a class="docs-nav-link" href="#section-audio">Audio</a>
+                            <a class="docs-nav-link" href="#section-realtime">Realtime Speech</a>
+                            <a class="docs-nav-link" href="#section-images">Images</a>
+                            <a class="docs-nav-link" href="#section-video">Video</a>
+                            <a class="docs-nav-link" href="#section-unimplemented">Unimplemented</a>
+                        </div>
+                    </div>
+
+                    <div class="docs-nav-group">
+                        <button type="button" class="docs-nav-group-toggle" aria-expanded="false">
+                            <span class="docs-nav-title">Management APIs</span>
+                            <span class="docs-nav-caret" aria-hidden="true">⌄</span>
+                        </button>
+                        <div class="docs-nav-links hidden">
+                            <a class="docs-nav-link" href="#section-system">System</a>
+                            <a class="docs-nav-link" href="#section-system-settings">System Settings</a>
+                            <a class="docs-nav-link" href="#section-user-auth">User Authentication</a>
+                            <a class="docs-nav-link" href="#section-user-management">User Management</a>
+                            <a class="docs-nav-link" href="#section-two-factor-auth">Two-Factor Authentication</a>
+                            <a class="docs-nav-link" href="#section-oauth">OAuth</a>
+                            <a class="docs-nav-link" href="#section-channel-management">Channel Management</a>
+                            <a class="docs-nav-link" href="#section-model-management">Model Management</a>
+                            <a class="docs-nav-link" href="#section-token-management">Token Management</a>
+                            <a class="docs-nav-link" href="#section-redemption">Redemption Codes</a>
+                            <a class="docs-nav-link" href="#section-payment">Payment</a>
+                            <a class="docs-nav-link" href="#section-logs">Logs</a>
+                            <a class="docs-nav-link" href="#section-statistics">Statistics</a>
+                            <a class="docs-nav-link" href="#section-tasks">Tasks</a>
+                            <a class="docs-nav-link" href="#section-groups">Groups</a>
+                            <a class="docs-nav-link" href="#section-vendors">Vendors</a>
+                            <a class="docs-nav-link" href="#section-security-verification">Security Verification</a>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <section class="docs-main" id="docsContent">
+                <article class="docs-section" id="section-overview" data-doc-title="Overview"
+                    data-doc-search="overview api reference new api documentation rest ai management">
+                    <div class="section-anchor-wrap">
+                        <h2>Overview</h2>
+                        <a class="heading-anchor" href="#section-overview" aria-label="Anchor to Overview">#</a>
+                    </div>
+                    <p>
+                        API cung cấp đầy đủ nhóm RESTful API, được chia thành <strong>AI Model APIs</strong> và
+                        <strong>Management APIs</strong>. Bộ tài liệu này giữ nguyên hướng sử dụng thực tế của tài liệu
+                        gốc:
+                        gọi mô hình AI bằng định dạng tương thích OpenAI, đồng thời quản trị người dùng, token, thanh
+                        toán,
+                        kênh và thống kê từ cùng một backend.
+                    </p>
+                    <h3>Known placeholder route families</h3>
+                    <ul class="docs-feature-list">
+                        <li><code>/v1/files</code></li>
+                        <li>Các resource batch/uploads/assistants-style còn chưa hoàn thiện trong một số bản triển khai.
+                        </li>
+                        <li>Các endpoint chỉ xuất hiện trong menu tài liệu nhưng chưa có backend support đầy đủ.</li>
+                    </ul>
+                    <div class="docs-callout">
+                        <strong>Online Debugging</strong>
+                        <p>
+                            Bạn có thể kiểm thử endpoint trực tiếp thông qua playground hoặc gửi request đến domain của
+                            bạn.
+                            Cấu trúc hiển thị dưới đây tập trung vào endpoint, header, body, response và code examples
+                            để dùng ngay.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="docs-section" id="section-ai-model-apis" data-doc-title="AI Model APIs"
+                    data-doc-search="ai model apis chat completions embeddings rerank audio images models moderation realtime">
+                    <div class="section-anchor-wrap">
+                        <h2>AI Model APIs</h2>
+                        <a class="heading-anchor" href="#section-ai-model-apis"
+                            aria-label="Anchor to AI Model APIs">#</a>
+                    </div>
+                    <p>
+                        AI Model APIs tương thích OpenAI API format và là phần giao tiếp chính để truy cập các năng lực
+                        AI.
+                        Nhóm này bao gồm model listing, chat, responses, completions, embeddings, rerank, moderation,
+                        audio,
+                        realtime, images, video và một số placeholder endpoints cho các khả năng đang trong lộ trình
+                        triển khai.
+                    </p>
+                    <div class="docs-table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Capability</th>
+                                    <th>Primary endpoint</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Model discovery</td>
+                                    <td><button type="button" class="inline-copy endpoint-copy"
+                                            data-copy="GET /v1/models">GET /v1/models</button></td>
+                                    <td>Liệt kê model khả dụng và tự nhận diện định dạng trả về theo header.</td>
+                                </tr>
+                                <tr>
+                                    <td>Chat</td>
+                                    <td><button type="button" class="inline-copy endpoint-copy"
+                                            data-copy="POST /v1/chat/completions">POST /v1/chat/completions</button>
+                                    </td>
+                                    <td>Tạo phản hồi từ lịch sử hội thoại, hỗ trợ stream và non-stream.</td>
+                                </tr>
+                                <tr>
+                                    <td>Responses</td>
+                                    <td><button type="button" class="inline-copy endpoint-copy"
+                                            data-copy="POST /v1/responses">POST /v1/responses</button></td>
+                                    <td>Responses API cho multi-turn, tool calling, reasoning.</td>
+                                </tr>
+                                <tr>
+                                    <td>Embeddings</td>
+                                    <td><button type="button" class="inline-copy endpoint-copy"
+                                            data-copy="POST /v1/embeddings">POST /v1/embeddings</button></td>
+                                    <td>Chuyển text thành vector embeddings.</td>
+                                </tr>
+                                <tr>
+                                    <td>Images</td>
+                                    <td><button type="button" class="inline-copy endpoint-copy"
+                                            data-copy="POST /v1/images/generations">POST /v1/images/generations</button>
+                                    </td>
+                                    <td>Tạo ảnh bằng mô hình AI tương thích OpenAI image generation format.</td>
+                                </tr>
+                                <tr>
+                                    <td>Video</td>
+                                    <td><button type="button" class="inline-copy endpoint-copy"
+                                            data-copy="POST /v1/videos">POST /v1/videos</button></td>
+                                    <td>Tạo video AI bất đồng bộ và theo dõi tiến trình tác vụ video generation.</td>
+                                </tr>
+                                <tr>
+                                    <td>Unimplemented</td>
+                                    <td><button type="button" class="inline-copy endpoint-copy"
+                                            data-copy="GET /v1/files">GET /v1/files</button></td>
+                                    <td>Nhóm endpoint placeholder chưa được triển khai hoàn chỉnh trong hệ thống hiện
+                                        tại.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+
+                <article class="docs-section" id="section-management-apis" data-doc-title="Management APIs"
+                    data-doc-search="management apis system settings auth tokens logs statistics users payment admin">
+                    <div class="section-anchor-wrap">
+                        <h2>Management APIs</h2>
+                        <a class="heading-anchor" href="#section-management-apis"
+                            aria-label="Anchor to Management APIs">#</a>
+                    </div>
+                    <p>
+                        Management APIs phục vụ thao tác backend như cấu hình hệ thống, user management, token
+                        management,
+                        payment, logs, statistics, tasks, groups, vendors và các luồng xác thực. Đây là phần quan trọng
+                        để xây
+                        dựng dashboard vận hành hoàn chỉnh.
+                    </p>
+                    <ul class="docs-feature-list">
+                        <li>System status, initialization, homepage content, pricing và legal pages.</li>
+                        <li>Đăng nhập, đăng ký, OAuth và 2FA cho người dùng.</li>
+                        <li>Quản lý token, channel, model và redemption workflow.</li>
+                        <li>Thống kê usage, logs, tasks và business operations.</li>
+                    </ul>
+                </article>
+
+                <article class="docs-section" id="section-authentication" data-doc-title="Authentication"
+                    data-doc-search="authentication bearer token authorization x-api-key x-goog-api-key anthropic-version">
+                    <div class="section-anchor-wrap">
+                        <h2>Authentication</h2>
+                        <a class="heading-anchor" href="#section-authentication"
+                            aria-label="Anchor to Authentication">#</a>
+                    </div>
+                    <p>
+                        Phần lớn AI Model APIs dùng Bearer Token trong header theo định dạng
+                        <code>Authorization: Bearer sk-xxxxxx</code>. Một số endpoint nhận diện format đầu ra theo
+                        header:
+                        <code>x-api-key</code> và <code>anthropic-version</code> cho Anthropic/Claude, hoặc
+                        <code>x-goog-api-key</code> hay query <code>key</code> cho Gemini.
+                    </p>
+                    <div class="hero-code-window docs-code-window">
+                        <div class="code-toolbar">
+                            <span>Authorization Header</span>
+                            <button class="code-copy-btn" type="button"
+                                data-copy="Authorization: Bearer sk-xxxxxx">Copy</button>
+                        </div>
+                        <pre class="code-block themed-code"><code>Authorization: Bearer sk-xxxxxx</code></pre>
+                    </div>
+                </article>
+
+                <article class="docs-section" id="section-model-list" data-doc-title="Model List"
+                    data-doc-search="model list v1 models openai anthropic gemini">
+                    <div class="section-anchor-wrap">
+                        <h2>Model List</h2>
+                        <a class="heading-anchor" href="#section-model-list" aria-label="Anchor to Model List">#</a>
+                    </div>
+                    <p class="docs-eyebrow">Native OpenAI Format · GET</p>
+                    <div class="docs-endpoint-row">
+                        <span class="method-pill">GET</span>
+                        <button type="button" class="endpoint-pill endpoint-copy"
+                            data-copy="/v1/models">/v1/models</button>
+                    </div>
+                    <p>
+                        Lấy danh sách model hiện khả dụng. Endpoint tự động xác định định dạng trả về dựa trên request
+                        headers:
+                        trả Anthropic format khi có <code>x-api-key</code> và <code>anthropic-version</code>, trả Gemini
+                        format khi có
+                        <code>x-goog-api-key</code> hoặc query <code>key</code>, và mặc định trả OpenAI format trong các
+                        trường hợp còn lại.
+                    </p>
+                    <h3>Header & Query Parameters</h3>
+                    <div class="docs-table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Location</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Authorization</td>
+                                    <td>Header</td>
+                                    <td>Bearer token</td>
+                                    <td>Authorization: Bearer sk-xxxxxx</td>
+                                </tr>
+                                <tr>
+                                    <td>key</td>
+                                    <td>Query</td>
+                                    <td>string</td>
+                                    <td>Google API Key dùng cho Gemini format.</td>
+                                </tr>
+                                <tr>
+                                    <td>x-api-key</td>
+                                    <td>Header</td>
+                                    <td>string</td>
+                                    <td>Anthropic API Key dùng cho Claude format.</td>
+                                </tr>
+                                <tr>
+                                    <td>anthropic-version</td>
+                                    <td>Header</td>
+                                    <td>string</td>
+                                    <td>Phiên bản Anthropic API.</td>
+                                </tr>
+                                <tr>
+                                    <td>x-goog-api-key</td>
+                                    <td>Header</td>
+                                    <td>string</td>
+                                    <td>Google API Key dùng cho Gemini format.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="docs-example-grid">
+                        <div class="hero-code-window docs-code-window">
+                            <div class="code-toolbar"><span>cURL</span><button class="code-copy-btn" type="button"
+                                    data-copy='curl -X GET "https://your-domain/v1/models"'>Copy</button></div>
+                            <pre
+                                class="code-block themed-code"><code>curl -X GET "https://your-domain/v1/models"</code></pre>
+                        </div>
+                        <div class="hero-code-window docs-code-window">
+                            <div class="code-toolbar"><span>200 Response</span><button class="code-copy-btn"
+                                    type="button"
+                                    data-copy='{"object":"list","data":[{"id":"gpt-4","object":"model","created":0,"owned_by":"openai"}]}'>Copy</button>
+                            </div>
+                            <pre class="code-block themed-code"><code>{
+  "object": "list",
+  "data": [
+    {
+      "id": "gpt-4",
+      "object": "model",
+      "created": 0,
+      "owned_by": "openai"
+    }
+  ]
+}</code></pre>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="docs-section" id="section-chat-completions" data-doc-title="Chat Completions"
+                    data-doc-search="chat completions v1 chat completions stream tools response_format reasoning_effort messages">
+                    <div class="section-anchor-wrap">
+                        <h2>Chat Completions</h2>
+                        <a class="heading-anchor" href="#section-chat-completions"
+                            aria-label="Anchor to Chat Completions">#</a>
+                    </div>
+                    <p class="docs-eyebrow">ChatCompletions Format · POST</p>
+                    <div class="docs-endpoint-row">
+                        <span class="method-pill">POST</span>
+                        <button type="button" class="endpoint-pill endpoint-copy"
+                            data-copy="/v1/chat/completions">/v1/chat/completions</button>
+                    </div>
+                    <p>
+                        Tạo phản hồi từ lịch sử chat. Hỗ trợ streaming và non-streaming responses, tương thích với
+                        OpenAI Chat
+                        Completions API. Đây là endpoint phù hợp khi bạn muốn giữ workflow dựa trên
+                        <code>messages</code> cổ điển.
+                    </p>
+                    <h3>Endpoint variants</h3>
+                    <ul class="docs-feature-list">
+                        <li><strong>OpenAI ChatCompletions:</strong> <code>POST /v1/chat/completions</code></li>
+                        <li><strong>OpenAI Responses:</strong> <code>POST /v1/responses</code></li>
+                        <li><strong>Native Claude format:</strong> message-style request flow cho kênh Anthropic.</li>
+                        <li><strong>Gemini relay format:</strong> endpoint tương thích cho các model Gemini.</li>
+                    </ul>
+                    <h3>Request Body</h3>
+                    <div class="docs-table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Field</th>
+                                    <th>Type</th>
+                                    <th>Required</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>model</td>
+                                    <td>string</td>
+                                    <td>Yes</td>
+                                    <td>Model ID.</td>
+                                </tr>
+                                <tr>
+                                    <td>messages</td>
+                                    <td>array&lt;object&gt;</td>
+                                    <td>Yes</td>
+                                    <td>Danh sách message trong hội thoại.</td>
+                                </tr>
+                                <tr>
+                                    <td>temperature</td>
+                                    <td>number</td>
+                                    <td>No</td>
+                                    <td>Nhiệt độ sampling. Mặc định 1.</td>
+                                </tr>
+                                <tr>
+                                    <td>top_p</td>
+                                    <td>number</td>
+                                    <td>No</td>
+                                    <td>Nucleus sampling. Mặc định 1.</td>
+                                </tr>
+                                <tr>
+                                    <td>n</td>
+                                    <td>integer</td>
+                                    <td>No</td>
+                                    <td>Số lượng completion. Mặc định 1.</td>
+                                </tr>
+                                <tr>
+                                    <td>stream</td>
+                                    <td>boolean</td>
+                                    <td>No</td>
+                                    <td>Bật SSE streaming. Mặc định false.</td>
+                                </tr>
+                                <tr>
+                                    <td>stream_options</td>
+                                    <td>object</td>
+                                    <td>No</td>
+                                    <td>Tùy chọn stream bổ sung.</td>
+                                </tr>
+                                <tr>
+                                    <td>stop</td>
+                                    <td>string | array&lt;string&gt;</td>
+                                    <td>No</td>
+                                    <td>Stop sequences.</td>
+                                </tr>
+                                <tr>
+                                    <td>max_tokens</td>
+                                    <td>integer</td>
+                                    <td>No</td>
+                                    <td>Số token tối đa.</td>
+                                </tr>
+                                <tr>
+                                    <td>max_completion_tokens</td>
+                                    <td>integer</td>
+                                    <td>No</td>
+                                    <td>Giới hạn completion token.</td>
+                                </tr>
+                                <tr>
+                                    <td>presence_penalty</td>
+                                    <td>number</td>
+                                    <td>No</td>
+                                    <td>Mặc định 0.</td>
+                                </tr>
+                                <tr>
+                                    <td>frequency_penalty</td>
+                                    <td>number</td>
+                                    <td>No</td>
+                                    <td>Mặc định 0.</td>
+                                </tr>
+                                <tr>
+                                    <td>logit_bias</td>
+                                    <td>object</td>
+                                    <td>No</td>
+                                    <td>Tùy chỉnh token bias.</td>
+                                </tr>
+                                <tr>
+                                    <td>user</td>
+                                    <td>string</td>
+                                    <td>No</td>
+                                    <td>Định danh người dùng cuối.</td>
+                                </tr>
+                                <tr>
+                                    <td>tools</td>
+                                    <td>array&lt;object&gt;</td>
+                                    <td>No</td>
+                                    <td>Khai báo tools.</td>
+                                </tr>
+                                <tr>
+                                    <td>tool_choice</td>
+                                    <td>string | object</td>
+                                    <td>No</td>
+                                    <td>Chiến lược chọn tool.</td>
+                                </tr>
+                                <tr>
+                                    <td>response_format</td>
+                                    <td>object</td>
+                                    <td>No</td>
+                                    <td>Yêu cầu kiểu output.</td>
+                                </tr>
+                                <tr>
+                                    <td>seed</td>
+                                    <td>integer</td>
+                                    <td>No</td>
+                                    <td>Seed để tái lập.</td>
+                                </tr>
+                                <tr>
+                                    <td>reasoning_effort</td>
+                                    <td>string</td>
+                                    <td>No</td>
+                                    <td>low | medium | high cho model reasoning.</td>
+                                </tr>
+                                <tr>
+                                    <td>modalities</td>
+                                    <td>array&lt;string&gt;</td>
+                                    <td>No</td>
+                                    <td>Các modality đầu ra.</td>
+                                </tr>
+                                <tr>
+                                    <td>audio</td>
+                                    <td>object</td>
+                                    <td>No</td>
+                                    <td>Tùy chọn audio output.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <h3>Response semantics</h3>
+                    <ul class="docs-feature-list">
+                        <li><code>200</code>: trả về object <code>chat.completion</code> cùng <code>choices</code> và
+                            <code>usage</code>.
+                        </li>
+                        <li><code>400</code>: lỗi request body, model, tool schema hoặc tham số không hợp lệ.</li>
+                        <li><code>429</code>: vượt giới hạn tốc độ hoặc quota hiện tại.</li>
+                    </ul>
+                    <h3>Responses</h3>
+                    <p>Trạng thái phổ biến gồm <code>200</code>, <code>400</code> và <code>429</code>.</p>
+                    <div class="docs-example-grid">
+                        <div class="hero-code-window docs-code-window">
+                            <div class="code-toolbar"><span>cURL</span><button class="code-copy-btn" type="button"
+                                    data-copy='curl -X POST "https://your-domain/v1/chat/completions" -H "Content-Type: application/json" -d "{\"model\":\"gpt-4\",\"messages\":[{\"role\":\"system\",\"content\":\"string\"}]}"'>Copy</button>
+                            </div>
+                            <pre class=" code-block themed-code"><code>curl -X POST "https://your-domain/v1/chat/completions" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "gpt-4",
+    "messages": [
+      { "role": "system", "content": "string" }
+    ]
+  }'</code></pre>
+                        </div>
+                        <div class="hero-code-window docs-code-window">
+                            <div class="code-toolbar"><span>200 Response</span><button class="code-copy-btn"
+                                    type="button"
+                                    data-copy='{"id":"string","object":"chat.completion","created":0,"model":"string","choices":[{"index":0,"message":{"role":"assistant","content":"string","name":"string","tool_calls":[{"id":"string","type":"function","function":{"name":"string","arguments":"string"}}],"tool_call_id":"string","reasoning_content":"string"},"finish_reason":"stop"}],"usage":{"prompt_tokens":0,"completion_tokens":0,"total_tokens":0,"prompt_tokens_details":{"cached_tokens":0,"text_tokens":0,"audio_tokens":0,"image_tokens":0},"completion_tokens_details":{"text_tokens":0,"audio_tokens":0,"reasoning_tokens":0}},"system_fingerprint":"string"}'>Copy</button>
+                            </div>
+                            <pre class="code-block themed-code"><code>{
+  "id": "string",
+  "object": "chat.completion",
+  "created": 0,
+  "model": "string",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "string",
+        "name": "string",
+        "tool_calls": [
+          {
+            "id": "string",
+            "type": "function",
+            "function": {
+              "name": "string",
+              "arguments": "string"
+            }
+          }
+        ],
+        "tool_call_id": "string",
+        "reasoning_content": "string"
+      },
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 0,
+    "completion_tokens": 0,
+    "total_tokens": 0,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "text_tokens": 0,
+      "audio_tokens": 0,
+      "image_tokens": 0
+    },
+    "completion_tokens_details": {
+      "text_tokens": 0,
+      "audio_tokens": 0,
+      "reasoning_tokens": 0
+    }
+  },
+  "system_fingerprint": "string"
+}</code></pre>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="docs-section" id="section-responses" data-doc-title="Responses"
+                    data-doc-search="responses api v1 responses input previous_response_id reasoning tools truncation">
+                    <div class="section-anchor-wrap">
+                        <h2>Responses</h2>
+                        <a class="heading-anchor" href="#section-responses" aria-label="Anchor to Responses">#</a>
+                    </div>
+                    <p class="docs-eyebrow">Responses Format · POST</p>
+                    <div class="docs-endpoint-row">
+                        <span class="method-pill">POST</span>
+                        <button type="button" class="endpoint-pill endpoint-copy"
+                            data-copy="/v1/responses">/v1/responses</button>
+                    </div>
+                    <p>
+                        OpenAI Responses API được dùng để tạo phản hồi từ model, hỗ trợ multi-turn conversations, tool
+                        calling,
+                        reasoning và những workflow hiện đại hơn so với format chat completions truyền thống.
+                    </p>
+                    <h3>Endpoint coverage</h3>
+                    <ul class="docs-feature-list">
+                        <li><strong>Main endpoint:</strong> <code>POST /v1/responses</code></li>
+                        <li><strong>Conversation continuation:</strong> dùng <code>previous_response_id</code> để nối
+                            multi-turn workflow.</li>
+                        <li><strong>Tool orchestration:</strong> hỗ trợ <code>tools</code>, <code>tool_choice</code> và
+                            <code>reasoning</code>.
+                        </li>
+                    </ul>
+                    <h3>Response object highlights</h3>
+                    <ul class="docs-feature-list">
+                        <li>Trả về object <code>response</code> với <code>status</code>, <code>output</code> và
+                            <code>usage</code>.
+                        </li>
+                        <li><code>output</code> có thể chứa text segments, tool results hoặc reasoning-oriented items.
+                        </li>
+                        <li>Phù hợp cho các workflow agent/tool calling hiện đại hơn Chat Completions.</li>
+                    </ul>
+                    <div class="docs-table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Field</th>
+                                    <th>Type</th>
+                                    <th>Required</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>model</td>
+                                    <td>string</td>
+                                    <td>Yes</td>
+                                    <td>Model ID.</td>
+                                </tr>
+                                <tr>
+                                    <td>input</td>
+                                    <td>string | array&lt;object&gt;</td>
+                                    <td>No</td>
+                                    <td>Nội dung đầu vào, là string hoặc mảng messages.</td>
+                                </tr>
+                                <tr>
+                                    <td>instructions</td>
+                                    <td>string</td>
+                                    <td>No</td>
+                                    <td>System-style instruction riêng.</td>
+                                </tr>
+                                <tr>
+                                    <td>max_output_tokens</td>
+                                    <td>integer</td>
+                                    <td>No</td>
+                                    <td>Số token đầu ra tối đa.</td>
+                                </tr>
+                                <tr>
+                                    <td>temperature</td>
+                                    <td>number</td>
+                                    <td>No</td>
+                                    <td>Tùy chỉnh sampling.</td>
+                                </tr>
+                                <tr>
+                                    <td>top_p</td>
+                                    <td>number</td>
+                                    <td>No</td>
+                                    <td>Nucleus sampling.</td>
+                                </tr>
+                                <tr>
+                                    <td>stream</td>
+                                    <td>boolean</td>
+                                    <td>No</td>
+                                    <td>Bật streaming.</td>
+                                </tr>
+                                <tr>
+                                    <td>tools</td>
+                                    <td>array&lt;object&gt;</td>
+                                    <td>No</td>
+                                    <td>Khai báo tools.</td>
+                                </tr>
+                                <tr>
+                                    <td>tool_choice</td>
+                                    <td>string | object</td>
+                                    <td>No</td>
+                                    <td>Quy tắc chọn tool.</td>
+                                </tr>
+                                <tr>
+                                    <td>reasoning</td>
+                                    <td>object</td>
+                                    <td>No</td>
+                                    <td>Cấu hình reasoning.</td>
+                                </tr>
+                                <tr>
+                                    <td>previous_response_id</td>
+                                    <td>string</td>
+                                    <td>No</td>
+                                    <td>Nối tiếp cuộc hội thoại trước đó.</td>
+                                </tr>
+                                <tr>
+                                    <td>truncation</td>
+                                    <td>string</td>
+                                    <td>No</td>
+                                    <td>auto | disabled.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="docs-example-grid">
+                        <div class="hero-code-window docs-code-window">
+                            <div class="code-toolbar"><span>cURL</span><button class="code-copy-btn" type="button"
+                                    data-copy='curl -X POST "https://your-domain/v1/responses" -H "Content-Type: application/json" -d "{\"model\":\"string\"}"'>Copy</button>
+                            </div>
+                            <pre class=" code-block themed-code"><code>curl -X POST "https://your-domain/v1/responses" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "string"
+  }'</code></pre>
+                        </div>
+                        <div class="hero-code-window docs-code-window">
+                            <div class="code-toolbar"><span>200 Response</span><button class="code-copy-btn"
+                                    type="button"
+                                    data-copy='{"id":"string","object":"response","created_at":0,"status":"completed","model":"string","output":[{"type":"string","id":"string","status":"string","role":"string","content":[{"type":"string","text":"string"}]}],"usage":{"prompt_tokens":0,"completion_tokens":0,"total_tokens":0,"prompt_tokens_details":{"cached_tokens":0,"text_tokens":0,"audio_tokens":0,"image_tokens":0},"completion_tokens_details":{"text_tokens":0,"audio_tokens":0,"reasoning_tokens":0}}}'>Copy</button>
+                            </div>
+                            <pre class="code-block themed-code"><code>{
+  "id": "string",
+  "object": "response",
+  "created_at": 0,
+  "status": "completed",
+  "model": "string",
+  "output": [
+    {
+      "type": "string",
+      "id": "string",
+      "status": "string",
+      "role": "string",
+      "content": [
+        {
+          "type": "string",
+          "text": "string"
+        }
+      ]
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 0,
+    "completion_tokens": 0,
+    "total_tokens": 0,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "text_tokens": 0,
+      "audio_tokens": 0,
+      "image_tokens": 0
+    },
+    "completion_tokens_details": {
+      "text_tokens": 0,
+      "audio_tokens": 0,
+      "reasoning_tokens": 0
+    }
+  }
+}</code></pre>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="docs-section" id="section-completions" data-doc-title="Completions"
+                    data-doc-search="completions prompt text completion suffix echo stop stream">
+                    <div class="section-anchor-wrap">
+                        <h2>Completions</h2><a class="heading-anchor" href="#section-completions">#</a>
+                    </div>
+                    <p class="docs-eyebrow">Native OpenAI Format · POST</p>
+                    <div class="docs-endpoint-row"><span class="method-pill">POST</span><button type="button"
+                            class="endpoint-pill endpoint-copy" data-copy="/v1/completions">/v1/completions</button>
+                    </div>
+                    <p>Tạo text completions từ một prompt cho trước.</p>
+                    <h3>Related endpoint operations</h3>
+                    <ul class="docs-feature-list">
+                        <li><code>GET /v1/models</code>: liệt kê model khả dụng trước khi gọi completions.</li>
+                        <li><code>POST /v1/chat/completions</code>: lựa chọn thay thế khi bạn cần message-based
+                            workflow.</li>
+                        <li><code>POST /v1/responses</code>: lựa chọn mới hơn cho reasoning và tool orchestration.</li>
+                    </ul>
+                    <div class="docs-table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Field</th>
+                                    <th>Type</th>
+                                    <th>Required</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>model</td>
+                                    <td>string</td>
+                                    <td>Yes</td>
+                                    <td>Model ID.</td>
+                                </tr>
+                                <tr>
+                                    <td>prompt</td>
+                                    <td>string | array&lt;string&gt;</td>
+                                    <td>Yes</td>
+                                    <td>Prompt đầu vào.</td>
+                                </tr>
+                                <tr>
+                                    <td>max_tokens</td>
+                                    <td>integer</td>
+                                    <td>No</td>
+                                    <td>Completion token limit.</td>
+                                </tr>
+                                <tr>
+                                    <td>temperature</td>
+                                    <td>number</td>
+                                    <td>No</td>
+                                    <td>Sampling temperature.</td>
+                                </tr>
+                                <tr>
+                                    <td>top_p</td>
+                                    <td>number</td>
+                                    <td>No</td>
+                                    <td>Nucleus sampling.</td>
+                                </tr>
+                                <tr>
+                                    <td>n</td>
+                                    <td>integer</td>
+                                    <td>No</td>
+                                    <td>Số completion trả về.</td>
+                                </tr>
+                                <tr>
+                                    <td>stream</td>
+                                    <td>boolean</td>
+                                    <td>No</td>
+                                    <td>Bật streaming.</td>
+                                </tr>
+                                <tr>
+                                    <td>stop</td>
+                                    <td>string | array&lt;string&gt;</td>
+                                    <td>No</td>
+                                    <td>Stop sequence.</td>
+                                </tr>
+                                <tr>
+                                    <td>suffix</td>
+                                    <td>string</td>
+                                    <td>No</td>
+                                    <td>Suffix bổ sung.</td>
+                                </tr>
+                                <tr>
+                                    <td>echo</td>
+                                    <td>boolean</td>
+                                    <td>No</td>
+                                    <td>Có trả lại prompt hay không.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="docs-example-grid">
+                        <div class="hero-code-window docs-code-window">
+                            <div class="code-toolbar"><span>cURL</span><button class="code-copy-btn" type="button"
+                                    data-copy='curl -X POST "https://your-domain/v1/completions" -H "Content-Type: application/json" -d "{\"model\":\"string\",\"prompt\":\"string\"}"'>Copy</button>
+                            </div>
+                            <pre class=" code-block themed-code"><code>curl -X POST "https://your-domain/v1/completions" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "string",
+    "prompt": "string"
+  }'</code></pre>
+                        </div>
+                        <div class="hero-code-window docs-code-window">
+                            <div class="code-toolbar"><span>200 Response</span><button class="code-copy-btn"
+                                    type="button"
+                                    data-copy='{"id":"string","object":"text_completion","created":0,"model":"string","choices":[{"text":"string","index":0,"finish_reason":"string"}],"usage":{"prompt_tokens":0,"completion_tokens":0,"total_tokens":0,"prompt_tokens_details":{"cached_tokens":0,"text_tokens":0,"audio_tokens":0,"image_tokens":0},"completion_tokens_details":{"text_tokens":0,"audio_tokens":0,"reasoning_tokens":0}}}'>Copy</button>
+                            </div>
+                            <pre class="code-block themed-code"><code>{
+  "id": "string",
+  "object": "text_completion",
+  "created": 0,
+  "model": "string",
+  "choices": [
+    {
+      "text": "string",
+      "index": 0,
+      "finish_reason": "string"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 0,
+    "completion_tokens": 0,
+    "total_tokens": 0,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "text_tokens": 0,
+      "audio_tokens": 0,
+      "image_tokens": 0
+    },
+    "completion_tokens_details": {
+      "text_tokens": 0,
+      "audio_tokens": 0,
+      "reasoning_tokens": 0
+    }
+  }
+}</code></pre>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="docs-section" id="section-embeddings" data-doc-title="Embeddings"
+                    data-doc-search="embeddings vector float base64 dimensions input text">
+                    <div class="section-anchor-wrap">
+                        <h2>Embeddings</h2><a class="heading-anchor" href="#section-embeddings">#</a>
+                    </div>
+                    <p class="docs-eyebrow">Native OpenAI Format · POST</p>
+                    <div class="docs-endpoint-row"><span class="method-pill">POST</span><button type="button"
+                            class="endpoint-pill endpoint-copy" data-copy="/v1/embeddings">/v1/embeddings</button></div>
+                    <p>Chuyển text thành vector embeddings.</p>
+                    <h3>Endpoint behavior</h3>
+                    <ul class="docs-feature-list">
+                        <li><code>POST /v1/embeddings</code> nhận text hoặc mảng text và trả về vector embeddings.</li>
+                        <li>Thường dùng cho semantic search, retrieval, clustering và reranking pipeline.</li>
+                        <li>Có thể trả vector ở dạng float array hoặc representation khác tùy upstream/provider.</li>
+                    </ul>
+                    <div class="docs-table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Field</th>
+                                    <th>Type</th>
+                                    <th>Required</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>model</td>
+                                    <td>string</td>
+                                    <td>Yes</td>
+                                    <td>Model ID.</td>
+                                </tr>
+                                <tr>
+                                    <td>input</td>
+                                    <td>string | array&lt;string&gt;</td>
+                                    <td>Yes</td>
+                                    <td>Văn bản cần embedding.</td>
+                                </tr>
+                                <tr>
+                                    <td>encoding_format</td>
+                                    <td>string</td>
+                                    <td>No</td>
+                                    <td>float hoặc base64. Mặc định float.</td>
+                                </tr>
+                                <tr>
+                                    <td>dimensions</td>
+                                    <td>integer</td>
+                                    <td>No</td>
+                                    <td>Số chiều vector đầu ra.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="docs-example-grid">
+                        <div class="hero-code-window docs-code-window">
+                            <div class="code-toolbar"><span>cURL</span><button class="code-copy-btn" type="button"
+                                    data-copy='curl -X POST "https://your-domain/v1/embeddings" -H "Content-Type: application/json" -d "{\"model\":\"text-embedding-ada-002\",\"input\":\"string\"}"'>Copy</button>
+                            </div>
+                            <pre class="
+                                    code-block themed-code"><code>curl -X POST "https://your-domain/v1/embeddings" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "text-embedding-ada-002",
+    "input": "string"
+  }'</code></pre>
+                        </div>
+                        <div class="hero-code-window docs-code-window">
+                            <div class="code-toolbar"><span>200 Response</span><button class="code-copy-btn"
+                                    type="button"
+                                    data-copy='{"object":"list","data":[{"object":"embedding","index":0,"embedding":[0]}],"model":"string","usage":{"prompt_tokens":0,"total_tokens":0}}'>Copy</button>
+                            </div>
+                            <pre class="code-block themed-code"><code>{
+  "object": "list",
+  "data": [
+    {
+      "object": "embedding",
+      "index": 0,
+      "embedding": [0]
+    }
+  ],
+  "model": "string",
+  "usage": {
+    "prompt_tokens": 0,
+    "total_tokens": 0
+  }
+}</code></pre>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="docs-section" id="section-rerank" data-doc-title="Rerank"
+                    data-doc-search="rerank document query relevance_score return_documents top_n">
+                    <div class="section-anchor-wrap">
+                        <h2>Rerank</h2><a class="heading-anchor" href="#section-rerank">#</a>
+                    </div>
+                    <p class="docs-eyebrow">Document Reranking · POST</p>
+                    <div class="docs-endpoint-row"><span class="method-pill">POST</span><button type="button"
+                            class="endpoint-pill endpoint-copy" data-copy="/v1/rerank">/v1/rerank</button></div>
+                    <p>Rerank danh sách tài liệu theo mức độ liên quan với query.</p>
+                    <h3>Operational details</h3>
+                    <ul class="docs-feature-list">
+                        <li><code>POST /v1/rerank</code> chấm điểm mức liên quan giữa query và document list.</li>
+                        <li>Hữu ích cho retrieval-augmented generation khi cần sắp xếp lại kết quả tìm kiếm.</li>
+                        <li>Các response thường chứa <code>relevance_score</code> và index của document được chấm điểm.
+                        </li>
+                    </ul>
+                    <div class="docs-table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Field</th>
+                                    <th>Type</th>
+                                    <th>Required</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>model</td>
+                                    <td>string</td>
+                                    <td>Yes</td>
+                                    <td>Rerank model ID.</td>
+                                </tr>
+                                <tr>
+                                    <td>query</td>
+                                    <td>string</td>
+                                    <td>Yes</td>
+                                    <td>Văn bản truy vấn.</td>
+                                </tr>
+                                <tr>
+                                    <td>documents</td>
+                                    <td>array&lt;string | object&gt;</td>
+                                    <td>Yes</td>
+                                    <td>Danh sách tài liệu cần sắp xếp lại.</td>
+                                </tr>
+                                <tr>
+                                    <td>top_n</td>
+                                    <td>integer</td>
+                                    <td>No</td>
+                                    <td>Chỉ lấy N kết quả đầu.</td>
+                                </tr>
+                                <tr>
+                                    <td>return_documents</td>
+                                    <td>boolean</td>
+                                    <td>No</td>
+                                    <td>Mặc định false.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="hero-code-window docs-code-window">
+                        <div class="code-toolbar"><span>cURL</span><button class="code-copy-btn" type="button"
+                                data-copy='curl -X POST "https://your-domain/v1/rerank" -H "Content-Type: application/json" -d "{\"model\":\"rerank-english-v2.0\",\"query\":\"string\",\"documents\":[\"string\"]}"'>Copy</button>
+                        </div>
+                        <pre class="
+                                code-block themed-code"><code>curl -X POST "https://your-domain/v1/rerank" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "rerank-english-v2.0",
+    "query": "string",
+    "documents": ["string"]
+  }'</code></pre>
+                    </div>
+                </article>
+
+                <article class="docs-section" id="section-moderations" data-doc-title="Moderations"
+                    data-doc-search="moderations content safety usage policy flagged categories category_scores">
+                    <div class="section-anchor-wrap">
+                        <h2>Moderations</h2><a class="heading-anchor" href="#section-moderations">#</a>
+                    </div>
+                    <p class="docs-eyebrow">Native OpenAI Format · POST</p>
+                    <div class="docs-endpoint-row"><span class="method-pill">POST</span><button type="button"
+                            class="endpoint-pill endpoint-copy" data-copy="/v1/moderations">/v1/moderations</button>
+                    </div>
+                    <p>
+                        Kiểm tra nội dung text có vi phạm usage policy hay không. Đây là công cụ compliance và không
+                        thay thế trách nhiệm
+                        safety governance, báo cáo lạm dụng hoặc cơ chế audit phía deployer.
+                    </p>
+                    <h3>Compliance usage</h3>
+                    <ul class="docs-feature-list">
+                        <li><code>POST /v1/moderations</code> được dùng như một lớp kiểm tra an toàn nội dung.</li>
+                        <li>Kết quả thường bao gồm <code>flagged</code>, <code>categories</code> và
+                            <code>category_scores</code>.
+                        </li>
+                        <li>Nên kết hợp với logging, review flow và abuse handling của chính hệ thống triển khai.</li>
+                    </ul>
+                    <div class="docs-table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Field</th>
+                                    <th>Type</th>
+                                    <th>Required</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>input</td>
+                                    <td>string | array&lt;string&gt;</td>
+                                    <td>Yes</td>
+                                    <td>Nội dung cần moderation.</td>
+                                </tr>
+                                <tr>
+                                    <td>model</td>
+                                    <td>string</td>
+                                    <td>No</td>
+                                    <td>Model moderation.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="hero-code-window docs-code-window">
+                        <div class="code-toolbar"><span>cURL</span><button class="code-copy-btn" type="button"
+                                data-copy='curl -X POST "https://your-domain/v1/moderations" -H "Content-Type: application/json" -d "{\"input\":\"string\"}"'>Copy</button>
+                        </div>
+                        <pre class="
+                                code-block themed-code"><code>curl -X POST "https://your-domain/v1/moderations" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "input": "string"
+  }'</code></pre>
+                    </div>
+                </article>
+
+                <article class="docs-section" id="section-audio" data-doc-title="Audio"
+                    data-doc-search="audio speech transcription translation multipart form-data whisper tts">
+                    <div class="section-anchor-wrap">
+                        <h2>Audio</h2><a class="heading-anchor" href="#section-audio">#</a>
+                    </div>
+                    <p>
+                        Nhóm Audio bao gồm 3 endpoint OpenAI-compatible quan trọng: text-to-speech, audio transcriptions
+                        và audio translations.
+                    </p>
+                    <h3>Endpoint variants</h3>
+                    <ul class="docs-feature-list">
+                        <li><strong>Text-to-Speech:</strong> <code>POST /v1/audio/speech</code></li>
+                        <li><strong>Transcriptions:</strong> <code>POST /v1/audio/transcriptions</code></li>
+                        <li><strong>Translations:</strong> <code>POST /v1/audio/translations</code></li>
+                        <li>Một số vendor relay còn có thể cung cấp format đặc thù như Gemini relay.</li>
+                    </ul>
+                    <div class="docs-subsection" id="section-audio-speech">
+                        <div class="section-anchor-wrap">
+                            <h3>Text-to-Speech</h3><a class="heading-anchor" href="#section-audio-speech">#</a>
+                        </div>
+                        <div class="docs-endpoint-row"><span class="method-pill">POST</span><button type="button"
+                                class="endpoint-pill endpoint-copy"
+                                data-copy="/v1/audio/speech">/v1/audio/speech</button></div>
+                        <p>Chuyển text thành audio.</p>
+                        <div class="docs-table-wrap">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Field</th>
+                                        <th>Type</th>
+                                        <th>Required</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>model</td>
+                                        <td>string</td>
+                                        <td>Yes</td>
+                                        <td>TTS model.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>input</td>
+                                        <td>string</td>
+                                        <td>Yes</td>
+                                        <td>Văn bản cần chuyển thành giọng nói.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>voice</td>
+                                        <td>string</td>
+                                        <td>Yes</td>
+                                        <td>alloy | echo | fable | onyx | nova | shimmer.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>response_format</td>
+                                        <td>string</td>
+                                        <td>No</td>
+                                        <td>mp3 | opus | aac | flac | wav | pcm. Mặc định mp3.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>speed</td>
+                                        <td>number</td>
+                                        <td>No</td>
+                                        <td>Tốc độ phát, mặc định 1.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="docs-subsection" id="section-audio-transcriptions">
+                        <div class="section-anchor-wrap">
+                            <h3>Audio Transcriptions</h3><a class="heading-anchor"
+                                href="#section-audio-transcriptions">#</a>
+                        </div>
+                        <div class="docs-endpoint-row"><span class="method-pill">POST</span><button type="button"
+                                class="endpoint-pill endpoint-copy"
+                                data-copy="/v1/audio/transcriptions">/v1/audio/transcriptions</button></div>
+                        <p>Chuyển audio thành text.</p>
+                        <div class="docs-table-wrap">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Field</th>
+                                        <th>Type</th>
+                                        <th>Required</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>file</td>
+                                        <td>file</td>
+                                        <td>Yes</td>
+                                        <td>Audio file binary.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>model</td>
+                                        <td>string</td>
+                                        <td>Yes</td>
+                                        <td>Speech-to-text model.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>language</td>
+                                        <td>string</td>
+                                        <td>No</td>
+                                        <td>Mã ISO-639-1.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>prompt</td>
+                                        <td>string</td>
+                                        <td>No</td>
+                                        <td>Prompt hỗ trợ decode.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>response_format</td>
+                                        <td>string</td>
+                                        <td>No</td>
+                                        <td>json | text | srt | verbose_json | vtt.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>temperature</td>
+                                        <td>number</td>
+                                        <td>No</td>
+                                        <td>Sampling temperature.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>timestamp_granularities</td>
+                                        <td>array&lt;string&gt;</td>
+                                        <td>No</td>
+                                        <td>Tùy chọn granularities.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="docs-subsection" id="section-audio-translations">
+                        <div class="section-anchor-wrap">
+                            <h3>Audio Translation</h3><a class="heading-anchor" href="#section-audio-translations">#</a>
+                        </div>
+                        <div class="docs-endpoint-row"><span class="method-pill">POST</span><button type="button"
+                                class="endpoint-pill endpoint-copy"
+                                data-copy="/v1/audio/translations">/v1/audio/translations</button></div>
+                        <p>Dịch audio sang tiếng Anh.</p>
+                        <div class="docs-table-wrap">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Field</th>
+                                        <th>Type</th>
+                                        <th>Required</th>
+                                        <th>Description</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>file</td>
+                                        <td>file</td>
+                                        <td>Yes</td>
+                                        <td>Audio file binary.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>model</td>
+                                        <td>string</td>
+                                        <td>Yes</td>
+                                        <td>Translation model.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>prompt</td>
+                                        <td>string</td>
+                                        <td>No</td>
+                                        <td>Prompt hỗ trợ transcription.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>response_format</td>
+                                        <td>string</td>
+                                        <td>No</td>
+                                        <td>Định dạng đầu ra.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>temperature</td>
+                                        <td>number</td>
+                                        <td>No</td>
+                                        <td>Sampling temperature.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="docs-section" id="section-realtime" data-doc-title="Realtime Speech"
+                    data-doc-search="realtime websocket wss v1 realtime model query 101">
+                    <div class="section-anchor-wrap">
+                        <h2>Realtime Speech</h2><a class="heading-anchor" href="#section-realtime">#</a>
+                    </div>
+                    <p class="docs-eyebrow">Native OpenAI Format · GET</p>
+                    <div class="docs-endpoint-row"><span class="method-pill">GET</span><button type="button"
+                            class="endpoint-pill endpoint-copy" data-copy="/v1/realtime">/v1/realtime</button></div>
+                    <p>
+                        Thiết lập kết nối WebSocket cho các cuộc hội thoại thời gian thực. Đây là WebSocket endpoint và
+                        yêu cầu kết nối bằng
+                        giao thức WebSocket. Ví dụ URL:
+                        <code>wss://api.example.com/v1/realtime?model=gpt-4o-realtime</code>.
+                    </p>
+                    <h3>Session lifecycle</h3>
+                    <ul class="docs-feature-list">
+                        <li>Tạo realtime session để lấy thông tin kết nối audio streaming.</li>
+                        <li>Dùng session metadata để bắt đầu truyền nhận audio hai chiều.</li>
+                        <li>Thường đi kèm luồng ephemeral session hoặc signed session info từ backend.</li>
+                    </ul>
+                    <div class="docs-table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Parameter</th>
+                                    <th>Location</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Authorization</td>
+                                    <td>Header</td>
+                                    <td>Bearer token</td>
+                                    <td>Authorization: Bearer sk-xxxxxx</td>
+                                </tr>
+                                <tr>
+                                    <td>model</td>
+                                    <td>Query</td>
+                                    <td>string</td>
+                                    <td>Model sẽ được dùng trong phiên realtime.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+
+                <article class="docs-section" id="section-images" data-doc-title="Images"
+                    data-doc-search="images image generation dall-e gpt-image-1 openai images generations variations edits multipart">
+                    <div class="section-anchor-wrap">
+                        <h2>Images</h2><a class="heading-anchor" href="#section-images">#</a>
+                    </div>
+                    <p class="docs-eyebrow">OpenAI Image Format · POST</p>
+                    <div class="docs-endpoint-row">
+                        <span class="method-pill">POST</span>
+                        <button type="button" class="endpoint-pill endpoint-copy"
+                            data-copy="/v1/images/generations">/v1/images/generations</button>
+                    </div>
+                    <p>
+                        Nhóm Images cung cấp giao diện tạo ảnh AI tương thích OpenAI image generation API. Theo tài liệu
+                        gốc, đây là nơi dùng để sinh hình ảnh từ prompt và mở rộng sang các workflow như chỉnh sửa hoặc
+                        biến thể ảnh tùy năng lực model được bật trong hệ thống.
+                    </p>
+                    <h3>Endpoint variants</h3>
+                    <ul class="docs-feature-list">
+                        <li><strong>Generate Images:</strong> <code>POST /v1/images/generations</code></li>
+                        <li><strong>Edit Image:</strong> tài liệu API còn có route <code>POST /v1/images/edits</code>
+                            cho image editing.</li>
+                        <li>Một số model/vendor khác như Qwen có thể có route/format bổ sung dưới cùng nhóm Images.</li>
+                    </ul>
+                    <h3>Use cases</h3>
+                    <ul class="docs-feature-list">
+                        <li>Tạo ảnh mới từ prompt văn bản.</li>
+                        <li>Gọi các model image generation như <code>gpt-image-1</code> hoặc các model tương thích khác.
+                        </li>
+                        <li>Mở rộng sang image edits/variations nếu channel upstream hỗ trợ.</li>
+                    </ul>
+                    <h3>Request Body</h3>
+                    <div class="docs-table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Field</th>
+                                    <th>Type</th>
+                                    <th>Required</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>model</td>
+                                    <td>string</td>
+                                    <td>Yes</td>
+                                    <td>Model ID dùng cho image generation.</td>
+                                </tr>
+                                <tr>
+                                    <td>prompt</td>
+                                    <td>string</td>
+                                    <td>Yes</td>
+                                    <td>Mô tả ảnh cần tạo.</td>
+                                </tr>
+                                <tr>
+                                    <td>size</td>
+                                    <td>string</td>
+                                    <td>No</td>
+                                    <td>Kích thước đầu ra như <code>1024x1024</code>.</td>
+                                </tr>
+                                <tr>
+                                    <td>quality</td>
+                                    <td>string</td>
+                                    <td>No</td>
+                                    <td>Chất lượng ảnh đầu ra nếu model hỗ trợ.</td>
+                                </tr>
+                                <tr>
+                                    <td>n</td>
+                                    <td>integer</td>
+                                    <td>No</td>
+                                    <td>Số lượng ảnh cần tạo.</td>
+                                </tr>
+                                <tr>
+                                    <td>response_format</td>
+                                    <td>string</td>
+                                    <td>No</td>
+                                    <td>Thường là <code>url</code> hoặc <code>b64_json</code>.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="docs-example-grid">
+                        <div class="hero-code-window docs-code-window">
+                            <div class="code-toolbar"><span>cURL</span><button class="code-copy-btn" type="button"
+                                    data-copy='curl -X POST "https://your-domain/v1/images/generations" \
+  -H "Authorization: Bearer sk-******" \
+  -H "Content-Type: application/json" \
+  -d "{\"model\":\"gpt-image-1\",\"prompt\":\"A cinematic neon city at night\",\"size\":\"1024x1024\"}"'>Copy</button>
+                            </div>
+                            <pre class="code-block themed-code"><code>curl -X POST "https://your-domain/v1/images/generations" \
+  -H "Authorization: Bearer sk-******" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "gpt-image-1",
+    "prompt": "A cinematic neon city at night",
+    "size": "1024x1024"
+  }'</code></pre>
+                        </div>
+                        <div class="hero-code-window docs-code-window">
+                            <div class="code-toolbar"><span>200 Response</span><button class="code-copy-btn"
+                                    type="button"
+                                    data-copy='{"created":1711111111,"data":[{"url":"https://cdn.example.com/generated-image.png"}]}'>Copy</button>
+                            </div>
+                            <pre class="code-block themed-code"><code>{
+  "created": 1711111111,
+  "data": [
+    {
+      "url": "https://cdn.example.com/generated-image.png"
+    }
+  ]
+}</code></pre>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="docs-section" id="section-video" data-doc-title="Video"
+                    data-doc-search="video sora create video task async polling status result download">
+                    <div class="section-anchor-wrap">
+                        <h2>Video</h2><a class="heading-anchor" href="#section-video">#</a>
+                    </div>
+                    <p class="docs-eyebrow">Video Generation · POST</p>
+                    <div class="docs-endpoint-row">
+                        <span class="method-pill">POST</span>
+                        <button type="button" class="endpoint-pill endpoint-copy"
+                            data-copy="/v1/videos">/v1/videos</button>
+                    </div>
+                    <p>
+                        Nhóm Video dùng cho AI video generation theo mô hình bất đồng bộ. Theo tài liệu API, đây là
+                        nơi
+                        tạo video task, sau đó truy vấn trạng thái và lấy kết quả khi quá trình render hoàn tất.
+                    </p>
+                    <h3>Endpoint-level flow</h3>
+                    <ul class="docs-feature-list">
+                        <li><strong>Create video:</strong> <code>POST /v1/videos</code></li>
+                        <li><strong>Check task status:</strong> tuỳ vendor/implementation có route truy vấn trạng thái
+                            riêng.</li>
+                        <li><strong>Fetch result:</strong> đọc metadata task hoặc URL video đầu ra sau khi render xong.
+                        </li>
+                    </ul>
+                    <h3>Workflow</h3>
+                    <ul class="docs-feature-list">
+                        <li>Gửi yêu cầu tạo video với prompt và cấu hình model.</li>
+                        <li>Nhận về task hoặc job identifier.</li>
+                        <li>Polling endpoint trạng thái để biết tiến trình xử lý.</li>
+                        <li>Lấy URL kết quả hoặc metadata sau khi tác vụ hoàn thành.</li>
+                    </ul>
+                    <h3>Typical Request Body</h3>
+                    <div class="docs-table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Field</th>
+                                    <th>Type</th>
+                                    <th>Required</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>model</td>
+                                    <td>string</td>
+                                    <td>Yes</td>
+                                    <td>Video model ID, ví dụ luồng Sora-compatible nếu được cấu hình.</td>
+                                </tr>
+                                <tr>
+                                    <td>prompt</td>
+                                    <td>string</td>
+                                    <td>Yes</td>
+                                    <td>Mô tả video cần tạo.</td>
+                                </tr>
+                                <tr>
+                                    <td>duration</td>
+                                    <td>number | string</td>
+                                    <td>No</td>
+                                    <td>Thời lượng video nếu upstream hỗ trợ.</td>
+                                </tr>
+                                <tr>
+                                    <td>size</td>
+                                    <td>string</td>
+                                    <td>No</td>
+                                    <td>Độ phân giải đầu ra.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="docs-example-grid">
+                        <div class="hero-code-window docs-code-window">
+                            <div class="code-toolbar"><span>Create Task</span><button class="code-copy-btn"
+                                    type="button" data-copy='curl -X POST "https://your-domain/v1/videos" \
+  -H "Authorization: Bearer sk-******" \
+  -H "Content-Type: application/json" \
+  -d "{\"model\":\"sora\",\"prompt\":\"A drone shot over a futuristic coastline\"}"'>Copy</button></div>
+                            <pre class="code-block themed-code"><code>curl -X POST "https://your-domain/v1/videos" \
+  -H "Authorization: Bearer sk-******" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "sora",
+    "prompt": "A drone shot over a futuristic coastline"
+  }'</code></pre>
+                        </div>
+                        <div class="hero-code-window docs-code-window">
+                            <div class="code-toolbar"><span>Accepted Response</span><button class="code-copy-btn"
+                                    type="button" data-copy='{"id":"video_task_123","status":"queued"}'>Copy</button>
+                            </div>
+                            <pre class="code-block themed-code"><code>{
+  "id": "video_task_123",
+  "status": "queued"
+}</code></pre>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="docs-section" id="section-unimplemented" data-doc-title="Unimplemented"
+                    data-doc-search="unimplemented placeholder files batches assistants uploads not yet implemented">
+                    <div class="section-anchor-wrap">
+                        <h2>Unimplemented</h2><a class="heading-anchor" href="#section-unimplemented">#</a>
+                    </div>
+                    <p>
+                        Theo tài liệu chính thức, API cũng liệt kê một nhóm endpoint placeholder chưa được triển
+                        khai.
+                        Các mục này đại diện cho các capability tương lai như file management hoặc các tài nguyên phụ
+                        trợ
+                        khác, nhưng hiện tại chưa sẵn sàng cho production use trong bản triển khai mặc định.
+                    </p>
+                    <div class="docs-callout">
+                        <strong>Implementation status</strong>
+                        <p>
+                            Nếu bạn gặp các route kiểu <code>/v1/files</code> hoặc các route tương tự thuộc nhóm
+                            placeholder, hãy coi đó là endpoint dự phòng/roadmap. Chỉ nên dùng khi upstream channel và
+                            backend API instance của bạn đã xác nhận hỗ trợ rõ ràng.
+                        </p>
+                    </div>
+                    <h3>Examples of placeholder capability groups</h3>
+                    <ul class="docs-feature-list">
+                        <li>Files</li>
+                        <li>Batch-style resource orchestration</li>
+                        <li>Các capability mới xuất hiện trong OpenAI-compatible roadmap nhưng chưa được bật mặc định
+                        </li>
+                    </ul>
+                </article>
+
+                <article class="docs-section" id="section-system" data-doc-title="System"
+                    data-doc-search="system api status setup initialization about home page pricing privacy agreement notice ratio uptime">
+                    <div class="section-anchor-wrap">
+                        <h2>System</h2><a class="heading-anchor" href="#section-system">#</a>
+                    </div>
+                    <p>
+                        Nhóm System chứa các endpoint thông tin công khai, trạng thái hệ thống và luồng khởi tạo ban
+                        đầu. Những endpoint public như about, notice, pricing hoặc policy thường được frontend dùng
+                        trước khi người dùng đăng nhập; các endpoint admin như status test dùng cho kiểm tra vận hành.
+                    </p>
+                    <h3>Endpoint summary</h3>
+                    <div class="docs-table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Operation</th>
+                                    <th>Method</th>
+                                    <th>Endpoint</th>
+                                    <th>Auth</th>
+                                    <th>Purpose</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Get About Information</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/about</code></td>
+                                    <td>No auth</td>
+                                    <td>Lấy thông tin giới thiệu hệ thống.</td>
+                                </tr>
+                                <tr>
+                                    <td>Get Home Page Content</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/home_page_content</code></td>
+                                    <td>No auth</td>
+                                    <td>Lấy nội dung hiển thị trên trang chủ.</td>
+                                </tr>
+                                <tr>
+                                    <td>Get Model List</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/models</code></td>
+                                    <td>User login</td>
+                                    <td>Lấy danh sách model trong hệ thống quản trị.</td>
+                                </tr>
+                                <tr>
+                                    <td>Get Announcements</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/notice</code></td>
+                                    <td>No auth</td>
+                                    <td>Lấy thông báo hệ thống.</td>
+                                </tr>
+                                <tr>
+                                    <td>Get Pricing Information</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/pricing</code></td>
+                                    <td>Optional login</td>
+                                    <td>Lấy dữ liệu giá, quota hoặc billing display.</td>
+                                </tr>
+                                <tr>
+                                    <td>Get Privacy Policy</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/privacy-policy</code></td>
+                                    <td>No auth</td>
+                                    <td>Lấy nội dung chính sách quyền riêng tư.</td>
+                                </tr>
+                                <tr>
+                                    <td>Get Ratio Configuration</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/ratio_config</code></td>
+                                    <td>No auth</td>
+                                    <td>Lấy cấu hình tỉ lệ/quy đổi model.</td>
+                                </tr>
+                                <tr>
+                                    <td>Get Initialization Status</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/setup</code></td>
+                                    <td>No auth</td>
+                                    <td>Kiểm tra instance đã được khởi tạo hay chưa.</td>
+                                </tr>
+                                <tr>
+                                    <td>Initialize System</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/setup</code></td>
+                                    <td>No auth</td>
+                                    <td>Khởi tạo tài khoản/quyền quản trị ban đầu.</td>
+                                </tr>
+                                <tr>
+                                    <td>Get System Status</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/status</code></td>
+                                    <td>No auth</td>
+                                    <td>Kiểm tra trạng thái hoạt động của hệ thống.</td>
+                                </tr>
+                                <tr>
+                                    <td>Test System Status</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/status/test</code></td>
+                                    <td>Admin</td>
+                                    <td>Endpoint kiểm tra trạng thái dành cho quản trị viên.</td>
+                                </tr>
+                                <tr>
+                                    <td>Get Uptime Kuma Status</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/uptime/status</code></td>
+                                    <td>No auth</td>
+                                    <td>Lấy trạng thái monitor từ Uptime Kuma nếu được cấu hình.</td>
+                                </tr>
+                                <tr>
+                                    <td>Get User Agreement</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/user-agreement</code></td>
+                                    <td>No auth</td>
+                                    <td>Lấy nội dung điều khoản sử dụng.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <h3>Initialization request</h3>
+                    <div class="docs-table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Field</th>
+                                    <th>Type</th>
+                                    <th>Required</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>username</td>
+                                    <td>string</td>
+                                    <td>No</td>
+                                    <td>Tên tài khoản quản trị ban đầu khi gọi <code>POST /api/setup</code>.</td>
+                                </tr>
+                                <tr>
+                                    <td>password</td>
+                                    <td>string</td>
+                                    <td>No</td>
+                                    <td>Mật khẩu tài khoản quản trị ban đầu khi gọi <code>POST /api/setup</code>.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+
+                <article class="docs-section" id="section-system-settings" data-doc-title="System Settings"
+                    data-doc-search="system settings options configuration management ratio sync migrate console root">
+                    <div class="section-anchor-wrap">
+                        <h2>System Settings</h2><a class="heading-anchor" href="#section-system-settings">#</a>
+                    </div>
+                    <p>
+                        Cụm System Settings dùng để đọc, cập nhật và đồng bộ option cấu hình hệ thống. Theo tài liệu
+                        API, nhóm này chủ yếu yêu cầu quyền Super Administrator/Root vì ảnh hưởng trực tiếp tới cấu
+                        hình vận hành, model ratio và console settings.
+                    </p>
+                    <h3>Endpoint summary</h3>
+                    <div class="docs-table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Operation</th>
+                                    <th>Method</th>
+                                    <th>Endpoint</th>
+                                    <th>Auth</th>
+                                    <th>Purpose</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Get System Options</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/option/</code></td>
+                                    <td>Root</td>
+                                    <td>Đọc toàn bộ option/cấu hình hệ thống.</td>
+                                </tr>
+                                <tr>
+                                    <td>Migrate Console Settings</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/option/migrate_console_setting</code></td>
+                                    <td>Root</td>
+                                    <td>Di trú cấu hình console sang định dạng/cấu trúc mới.</td>
+                                </tr>
+                                <tr>
+                                    <td>Update System Options</td>
+                                    <td><span class="method-pill">PUT</span></td>
+                                    <td><code>/api/option/</code></td>
+                                    <td>Root</td>
+                                    <td>Cập nhật option hệ thống.</td>
+                                </tr>
+                                <tr>
+                                    <td>Reset Model Ratio</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/option/rest_model_ratio</code></td>
+                                    <td>Root</td>
+                                    <td>Reset cấu hình ratio model về trạng thái mặc định.</td>
+                                </tr>
+                                <tr>
+                                    <td>Get Syncable Channels</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/ratio_sync/channels</code></td>
+                                    <td>Root</td>
+                                    <td>Lấy danh sách channel có thể đồng bộ ratio.</td>
+                                </tr>
+                                <tr>
+                                    <td>Fetch Upstream Ratios</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/ratio_sync/fetch</code></td>
+                                    <td>Root</td>
+                                    <td>Lấy ratio từ upstream để so sánh hoặc đồng bộ.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+
+                <article class="docs-section" id="section-user-auth" data-doc-title="User Authentication"
+                    data-doc-search="user auth login register reset password verification passkey two factor groups logout">
+                    <div class="section-anchor-wrap">
+                        <h2>User Authentication</h2><a class="heading-anchor" href="#section-user-auth">#</a>
+                    </div>
+                    <p>
+                        Nhóm User Authentication xử lý đăng nhập, đăng xuất, đăng ký, reset password, email
+                        verification, 2FA login và passkey login. Các endpoint public phục vụ luồng vào hệ thống, trong
+                        khi logout hoặc danh sách group có thể yêu cầu session/token hợp lệ tùy cấu hình triển khai.
+                    </p>
+                    <h3>Endpoint summary</h3>
+                    <div class="docs-table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Operation</th>
+                                    <th>Method</th>
+                                    <th>Endpoint</th>
+                                    <th>Auth</th>
+                                    <th>Key parameters/body</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Send Password Reset Email</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/reset_password</code></td>
+                                    <td>No auth</td>
+                                    <td>Query <code>email</code> required.</td>
+                                </tr>
+                                <tr>
+                                    <td>Get User Group List</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/user/groups</code></td>
+                                    <td>No auth / instance policy</td>
+                                    <td>Lấy group có thể chọn khi đăng ký hoặc cấu hình user.</td>
+                                </tr>
+                                <tr>
+                                    <td>Two-Factor Authentication Login</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/user/login/2fa</code></td>
+                                    <td>No auth</td>
+                                    <td>Body chứa thông tin phiên login và mã 2FA.</td>
+                                </tr>
+                                <tr>
+                                    <td>User Login</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/user/login</code></td>
+                                    <td>No auth</td>
+                                    <td>Body <code>username</code>, <code>password</code>.</td>
+                                </tr>
+                                <tr>
+                                    <td>User Logout</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/user/logout</code></td>
+                                    <td>Session/user</td>
+                                    <td>Xóa session hoặc trạng thái đăng nhập hiện tại.</td>
+                                </tr>
+                                <tr>
+                                    <td>Start Passkey Login</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/user/passkey/login/begin</code></td>
+                                    <td>No auth</td>
+                                    <td>Bắt đầu challenge đăng nhập bằng passkey.</td>
+                                </tr>
+                                <tr>
+                                    <td>Complete Passkey Login</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/user/passkey/login/finish</code></td>
+                                    <td>No auth</td>
+                                    <td>Hoàn tất passkey challenge.</td>
+                                </tr>
+                                <tr>
+                                    <td>User Registration</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/user/register</code></td>
+                                    <td>No auth</td>
+                                    <td>Tạo tài khoản mới với thông tin đăng ký.</td>
+                                </tr>
+                                <tr>
+                                    <td>Reset Password</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/user/reset</code></td>
+                                    <td>No auth</td>
+                                    <td>Đặt lại mật khẩu bằng token/code reset.</td>
+                                </tr>
+                                <tr>
+                                    <td>Send Email Verification Code</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/verification</code></td>
+                                    <td>No auth</td>
+                                    <td>Gửi mã xác minh email.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <h3>Login request body</h3>
+                    <div class="docs-table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Field</th>
+                                    <th>Type</th>
+                                    <th>Required</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>username</td>
+                                    <td>string</td>
+                                    <td>No</td>
+                                    <td>Tên đăng nhập hoặc định danh account.</td>
+                                </tr>
+                                <tr>
+                                    <td>password</td>
+                                    <td>string</td>
+                                    <td>No</td>
+                                    <td>Mật khẩu người dùng.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+
+                <article class="docs-section" id="section-user-management" data-doc-title="User Management"
+                    data-doc-search="user management self profile users passkey invitation topup admin account access token">
+                    <div class="section-anchor-wrap">
+                        <h2>User Management</h2><a class="heading-anchor" href="#section-user-management">#</a>
+                    </div>
+                    <p>
+                        Quản lý thông tin người dùng, dữ liệu self profile, passkey, invitation quota, access token,
+                        user status và các thao tác admin liên quan đến tài khoản.
+                    </p>
+                    <h3>Endpoint summary</h3>
+                    <div class="docs-table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Operation</th>
+                                    <th>Method</th>
+                                    <th>Endpoint</th>
+                                    <th>Auth</th>
+                                    <th>Parameters/body</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Convert Invitation Quota</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/user/aff_transfer</code></td>
+                                    <td>User login</td>
+                                    <td>Chuyển invitation quota thành quota/tín dụng theo chính sách instance.</td>
+                                </tr>
+                                <tr>
+                                    <td>Get Invitation Code</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/user/aff</code></td>
+                                    <td>User login</td>
+                                    <td>Lấy mã giới thiệu/invitation code của người dùng hiện tại.</td>
+                                </tr>
+                                <tr>
+                                    <td>Get All Users</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/user/</code></td>
+                                    <td>Admin</td>
+                                    <td>Query phân trang như <code>p?</code>, <code>page_size?</code>.</td>
+                                </tr>
+                                <tr>
+                                    <td>Create User</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/user/</code></td>
+                                    <td>Admin</td>
+                                    <td>JSON body chứa thông tin user mới.</td>
+                                </tr>
+                                <tr>
+                                    <td>Update User</td>
+                                    <td><span class="method-pill">PUT</span></td>
+                                    <td><code>/api/user/</code></td>
+                                    <td>Admin</td>
+                                    <td>JSON body chứa thông tin user cần cập nhật.</td>
+                                </tr>
+                                <tr>
+                                    <td>Search Users</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/user/search</code></td>
+                                    <td>Admin</td>
+                                    <td>Query <code>keyword?</code>, phân trang tùy instance.</td>
+                                </tr>
+                                <tr>
+                                    <td>Get Specific User</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/user/{id}</code></td>
+                                    <td>Admin</td>
+                                    <td>Path <code>id</code> required.</td>
+                                </tr>
+                                <tr>
+                                    <td>Delete User</td>
+                                    <td><span class="method-pill">DELETE</span></td>
+                                    <td><code>/api/user/{id}</code></td>
+                                    <td>Admin</td>
+                                    <td>Path <code>id</code> required.</td>
+                                </tr>
+                                <tr>
+                                    <td>Manage User Status</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/user/manage</code></td>
+                                    <td>Admin</td>
+                                    <td>Bật/tắt, khóa/mở hoặc điều chỉnh trạng thái user.</td>
+                                </tr>
+                                <tr>
+                                    <td>Admin Disable User 2FA</td>
+                                    <td><span class="method-pill">DELETE</span></td>
+                                    <td><code>/api/user/{id}/2fa</code></td>
+                                    <td>Admin</td>
+                                    <td>Path <code>id</code> required.</td>
+                                </tr>
+                                <tr>
+                                    <td>Admin Reset User Passkey</td>
+                                    <td><span class="method-pill">DELETE</span></td>
+                                    <td><code>/api/user/{id}/reset_passkey</code></td>
+                                    <td>Admin</td>
+                                    <td>Reset passkey của user chỉ định.</td>
+                                </tr>
+                                <tr>
+                                    <td>Get User Available Models</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/user/models</code></td>
+                                    <td>User login</td>
+                                    <td>Lấy danh sách model mà user hiện tại được phép dùng.</td>
+                                </tr>
+                                <tr>
+                                    <td>Get Current User Information</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/user/self</code></td>
+                                    <td>User login</td>
+                                    <td>Lấy profile/self information.</td>
+                                </tr>
+                                <tr>
+                                    <td>Update Current User Information</td>
+                                    <td><span class="method-pill">PUT</span></td>
+                                    <td><code>/api/user/self</code></td>
+                                    <td>User login</td>
+                                    <td>Cập nhật thông tin cá nhân của user hiện tại.</td>
+                                </tr>
+                                <tr>
+                                    <td>Delete Current User</td>
+                                    <td><span class="method-pill">DELETE</span></td>
+                                    <td><code>/api/user/self</code></td>
+                                    <td>User login</td>
+                                    <td>Xóa tài khoản hiện tại nếu instance cho phép.</td>
+                                </tr>
+                                <tr>
+                                    <td>Get Current User Groups</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/user/self/groups</code></td>
+                                    <td>User login</td>
+                                    <td>Lấy group/quyền hiện tại của user.</td>
+                                </tr>
+                                <tr>
+                                    <td>Update User Settings</td>
+                                    <td><span class="method-pill">PUT</span></td>
+                                    <td><code>/api/user/setting</code></td>
+                                    <td>User login</td>
+                                    <td>Cập nhật preference/settings cá nhân.</td>
+                                </tr>
+                                <tr>
+                                    <td>Generate Access Token</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/user/token</code></td>
+                                    <td>User login</td>
+                                    <td>Tạo hoặc lấy access token cho dashboard/session workflow.</td>
+                                </tr>
+                                <tr>
+                                    <td>Get Passkey Status</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/user/passkey</code></td>
+                                    <td>User login</td>
+                                    <td>Kiểm tra passkey đã được cấu hình hay chưa.</td>
+                                </tr>
+                                <tr>
+                                    <td>Delete Passkey</td>
+                                    <td><span class="method-pill">DELETE</span></td>
+                                    <td><code>/api/user/passkey</code></td>
+                                    <td>User login</td>
+                                    <td>Xóa passkey của user hiện tại.</td>
+                                </tr>
+                                <tr>
+                                    <td>Start Passkey Registration</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/user/passkey/register/begin</code></td>
+                                    <td>User login</td>
+                                    <td>Bắt đầu challenge đăng ký passkey.</td>
+                                </tr>
+                                <tr>
+                                    <td>Complete Passkey Registration</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/user/passkey/register/finish</code></td>
+                                    <td>User login</td>
+                                    <td>Hoàn tất challenge đăng ký passkey.</td>
+                                </tr>
+                                <tr>
+                                    <td>Start Passkey Verification</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/user/passkey/verify/begin</code></td>
+                                    <td>User login</td>
+                                    <td>Bắt đầu challenge xác minh passkey.</td>
+                                </tr>
+                                <tr>
+                                    <td>Complete Passkey Verification</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/user/passkey/verify/finish</code></td>
+                                    <td>User login</td>
+                                    <td>Hoàn tất xác minh passkey.</td>
+                                </tr>
+                                <tr>
+                                    <td>Admin Completes Top-up</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/user/topup/complete</code></td>
+                                    <td>Admin</td>
+                                    <td>Admin xác nhận top-up thủ công cho user.</td>
+                                </tr>
+                                <tr>
+                                    <td>Get All Top-up Records</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/user/topup</code></td>
+                                    <td>Admin</td>
+                                    <td>Truy vấn toàn bộ lịch sử top-up.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+
+                <article class="docs-section" id="section-two-factor-auth" data-doc-title="Two-Factor Authentication"
+                    data-doc-search="2fa two factor authentication status setup enable disable backup codes statistics">
+                    <div class="section-anchor-wrap">
+                        <h2>Two-Factor Authentication</h2><a class="heading-anchor"
+                            href="#section-two-factor-auth">#</a>
+                    </div>
+                    <p>
+                        Nhóm endpoint dành cho trạng thái 2FA, setup secret/QR, bật/tắt xác thực hai lớp, backup codes
+                        và thống kê sử dụng 2FA.
+                    </p>
+                    <h3>Endpoint summary</h3>
+                    <div class="docs-table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Operation</th>
+                                    <th>Method</th>
+                                    <th>Endpoint</th>
+                                    <th>Auth</th>
+                                    <th>Parameters/body</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Get 2FA Status</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/user/2fa/status</code></td>
+                                    <td>User login</td>
+                                    <td>Kiểm tra user hiện tại đã bật 2FA hay chưa.</td>
+                                </tr>
+                                <tr>
+                                    <td>Set Up 2FA</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/user/2fa/setup</code></td>
+                                    <td>User login</td>
+                                    <td>Tạo secret/QR setup cho authenticator app.</td>
+                                </tr>
+                                <tr>
+                                    <td>Enable 2FA</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/user/2fa/enable</code></td>
+                                    <td>User login</td>
+                                    <td>Body thường gồm mã OTP để xác nhận bật 2FA.</td>
+                                </tr>
+                                <tr>
+                                    <td>Disable 2FA</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/user/2fa/disable</code></td>
+                                    <td>User login</td>
+                                    <td>Body gồm OTP/password tùy policy instance.</td>
+                                </tr>
+                                <tr>
+                                    <td>Regenerate Backup Codes</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/user/2fa/backup_codes</code></td>
+                                    <td>User login</td>
+                                    <td>Tạo lại backup recovery codes cho tài khoản.</td>
+                                </tr>
+                                <tr>
+                                    <td>Get 2FA Statistics</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/user/2fa/stats</code></td>
+                                    <td>User login / Admin</td>
+                                    <td>Lấy thống kê trạng thái hoặc mức sử dụng 2FA.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+
+                <article class="docs-section" id="section-oauth" data-doc-title="OAuth"
+                    data-doc-search="oauth github discord linuxdo oidc telegram wechat email bind state third party login">
+                    <div class="section-anchor-wrap">
+                        <h2>OAuth</h2><a class="heading-anchor" href="#section-oauth">#</a>
+                    </div>
+                    <p>
+                        Third-party OAuth login interface cho các luồng đăng nhập hoặc binding qua GitHub, Discord,
+                        LinuxDO, OIDC, Telegram, WeChat và email binding.
+                    </p>
+                    <h3>Endpoint summary</h3>
+                    <div class="docs-table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Operation</th>
+                                    <th>Method</th>
+                                    <th>Endpoint</th>
+                                    <th>Auth</th>
+                                    <th>Parameters/body</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Generate OAuth State</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/oauth/state</code></td>
+                                    <td>No auth</td>
+                                    <td>Tạo state token để chống CSRF trong OAuth flow.</td>
+                                </tr>
+                                <tr>
+                                    <td>GitHub OAuth Login</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/oauth/github</code></td>
+                                    <td>No auth / callback</td>
+                                    <td>Query <code>code?</code>, <code>state?</code>.</td>
+                                </tr>
+                                <tr>
+                                    <td>Discord OAuth Login</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/oauth/discord</code></td>
+                                    <td>No auth / callback</td>
+                                    <td>Query <code>code?</code>, <code>state?</code>.</td>
+                                </tr>
+                                <tr>
+                                    <td>LinuxDO OAuth Login</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/oauth/linuxdo</code></td>
+                                    <td>No auth / callback</td>
+                                    <td>Query callback từ LinuxDO OAuth provider.</td>
+                                </tr>
+                                <tr>
+                                    <td>OIDC Login</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/oauth/oidc</code></td>
+                                    <td>No auth / callback</td>
+                                    <td>Query callback OIDC như <code>code?</code>, <code>state?</code>.</td>
+                                </tr>
+                                <tr>
+                                    <td>Telegram Login</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/oauth/telegram/login</code></td>
+                                    <td>No auth</td>
+                                    <td>Query Telegram login payload/signature.</td>
+                                </tr>
+                                <tr>
+                                    <td>Bind Telegram</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/oauth/telegram/bind</code></td>
+                                    <td>User login</td>
+                                    <td>Liên kết Telegram account với user hiện tại.</td>
+                                </tr>
+                                <tr>
+                                    <td>WeChat OAuth Login</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/oauth/wechat</code></td>
+                                    <td>No auth / callback</td>
+                                    <td>Query WeChat OAuth callback.</td>
+                                </tr>
+                                <tr>
+                                    <td>Bind WeChat</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/oauth/wechat/bind</code></td>
+                                    <td>User login</td>
+                                    <td>Liên kết WeChat account với user hiện tại.</td>
+                                </tr>
+                                <tr>
+                                    <td>Bind Email</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/oauth/email/bind</code></td>
+                                    <td>User login</td>
+                                    <td>Query xác minh email binding theo policy instance.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+
+                <article class="docs-section" id="section-channel-management" data-doc-title="Channel Management"
+                    data-doc-search="channel management configuration providers upstream models tags balance test keys batch">
+                    <div class="section-anchor-wrap">
+                        <h2>Channel Management</h2><a class="heading-anchor" href="#section-channel-management">#</a>
+                    </div>
+                    <p>
+                        Quản trị cấu hình API channels, upstream providers, tags, key management, balance update, model
+                        discovery và test trạng thái kênh phía backend.
+                    </p>
+                    <h3>Endpoint summary</h3>
+                    <div class="docs-table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Operation</th>
+                                    <th>Method</th>
+                                    <th>Endpoint</th>
+                                    <th>Auth</th>
+                                    <th>Parameters/body</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Get All Channels</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/channel/</code></td>
+                                    <td>Admin</td>
+                                    <td>Query <code>p?</code>, <code>page_size?</code>, <code>status?</code>, <code>type?</code>, <code>tag_mode?</code>.</td>
+                                </tr>
+                                <tr>
+                                    <td>Add Channel</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/channel/</code></td>
+                                    <td>Admin</td>
+                                    <td>JSON body chứa cấu hình channel/upstream mới.</td>
+                                </tr>
+                                <tr>
+                                    <td>Update Channel</td>
+                                    <td><span class="method-pill">PUT</span></td>
+                                    <td><code>/api/channel/</code></td>
+                                    <td>Admin</td>
+                                    <td>JSON body chứa cấu hình channel cần cập nhật.</td>
+                                </tr>
+                                <tr>
+                                    <td>Search Channels</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/channel/search</code></td>
+                                    <td>Admin</td>
+                                    <td>Query <code>keyword?</code>, filter theo trạng thái/type tùy instance.</td>
+                                </tr>
+                                <tr>
+                                    <td>Get Specific Channel</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/channel/{id}</code></td>
+                                    <td>Admin</td>
+                                    <td>Path <code>id</code> required.</td>
+                                </tr>
+                                <tr>
+                                    <td>Delete Channel</td>
+                                    <td><span class="method-pill">DELETE</span></td>
+                                    <td><code>/api/channel/{id}</code></td>
+                                    <td>Admin</td>
+                                    <td>Path <code>id</code> required.</td>
+                                </tr>
+                                <tr>
+                                    <td>Batch Delete Channels</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/channel/batch</code></td>
+                                    <td>Admin</td>
+                                    <td>JSON body <code>ids?: array&lt;integer&gt;</code>.</td>
+                                </tr>
+                                <tr>
+                                    <td>Delete Disabled Channels</td>
+                                    <td><span class="method-pill">DELETE</span></td>
+                                    <td><code>/api/channel/disabled</code></td>
+                                    <td>Admin</td>
+                                    <td>Xóa hàng loạt channel đang disabled.</td>
+                                </tr>
+                                <tr>
+                                    <td>Copy Channel</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/channel/copy/{id}</code></td>
+                                    <td>Admin</td>
+                                    <td>Path <code>id</code> của channel cần clone.</td>
+                                </tr>
+                                <tr>
+                                    <td>Get Channel Key</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/channel/{id}/key</code></td>
+                                    <td>Admin</td>
+                                    <td>Lấy/hiển thị key cấu hình của channel chỉ định.</td>
+                                </tr>
+                                <tr>
+                                    <td>Manage Multiple Keys</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/channel/multi_key/manage</code></td>
+                                    <td>Admin</td>
+                                    <td>Thêm/xóa/cập nhật nhiều key cho channel.</td>
+                                </tr>
+                                <tr>
+                                    <td>Get Channel Model List</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/channel/models</code></td>
+                                    <td>Admin</td>
+                                    <td>Lấy danh sách model đã cấu hình theo channel.</td>
+                                </tr>
+                                <tr>
+                                    <td>Get Enabled Model List</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/channel/models_enabled</code></td>
+                                    <td>Admin</td>
+                                    <td>Lấy model khả dụng từ các channel đang enabled.</td>
+                                </tr>
+                                <tr>
+                                    <td>Get Model List</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/channel/fetch_models</code></td>
+                                    <td>Admin</td>
+                                    <td>Body chứa provider/channel config để fetch model list.</td>
+                                </tr>
+                                <tr>
+                                    <td>Get Upstream Model List</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/channel/fetch_models/{id}</code></td>
+                                    <td>Admin</td>
+                                    <td>Fetch models từ upstream của channel <code>id</code>.</td>
+                                </tr>
+                                <tr>
+                                    <td>Fix Channel Capability</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/channel/fix</code></td>
+                                    <td>Admin</td>
+                                    <td>Chuẩn hóa capability/model mapping của channel.</td>
+                                </tr>
+                                <tr>
+                                    <td>Test All Channels</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/channel/test</code></td>
+                                    <td>Admin</td>
+                                    <td>Kiểm tra toàn bộ channel.</td>
+                                </tr>
+                                <tr>
+                                    <td>Test Specific Channel</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/channel/test/{id}</code></td>
+                                    <td>Admin</td>
+                                    <td>Kiểm tra channel <code>id</code>.</td>
+                                </tr>
+                                <tr>
+                                    <td>Update All Channel Balances</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/channel/update_balance</code></td>
+                                    <td>Admin</td>
+                                    <td>Đồng bộ balance toàn bộ channel.</td>
+                                </tr>
+                                <tr>
+                                    <td>Update Specified Channel Balance</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/channel/update_balance/{id}</code></td>
+                                    <td>Admin</td>
+                                    <td>Đồng bộ balance channel <code>id</code>.</td>
+                                </tr>
+                                <tr>
+                                    <td>Batch Set Channel Tags</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/channel/batch/tag</code></td>
+                                    <td>Admin</td>
+                                    <td>Gán tag hàng loạt cho channel.</td>
+                                </tr>
+                                <tr>
+                                    <td>Edit Tag Channel</td>
+                                    <td><span class="method-pill">PUT</span></td>
+                                    <td><code>/api/channel/tag</code></td>
+                                    <td>Admin</td>
+                                    <td>Cập nhật cấu hình tag channel.</td>
+                                </tr>
+                                <tr>
+                                    <td>Enable Tag Channel</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/channel/tag/enabled</code></td>
+                                    <td>Admin</td>
+                                    <td>Bật channel theo tag.</td>
+                                </tr>
+                                <tr>
+                                    <td>Disable Tag Channel</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/channel/tag/disabled</code></td>
+                                    <td>Admin</td>
+                                    <td>Tắt channel theo tag.</td>
+                                </tr>
+                                <tr>
+                                    <td>Get Tag Models</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/channel/tag/models</code></td>
+                                    <td>Admin</td>
+                                    <td>Lấy model được gom theo tag.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+
+                <article class="docs-section" id="section-model-management" data-doc-title="Model Management"
+                    data-doc-search="model management metadata models config routing missing sync upstream preview search">
+                    <div class="section-anchor-wrap">
+                        <h2>Model Management</h2><a class="heading-anchor" href="#section-model-management">#</a>
+                    </div>
+                    <p>
+                        Nhóm quản lý model metadata/configuration ở cấp vận hành, khác với endpoint liệt kê models dành
+                        cho client. Dùng để tạo, cập nhật, xóa, tìm kiếm và đồng bộ model từ upstream.
+                    </p>
+                    <h3>Endpoint summary</h3>
+                    <div class="docs-table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Operation</th>
+                                    <th>Method</th>
+                                    <th>Endpoint</th>
+                                    <th>Auth</th>
+                                    <th>Parameters/body</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Get All Model Metadata</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/models/</code></td>
+                                    <td>Admin</td>
+                                    <td>Lấy toàn bộ model metadata trong dashboard.</td>
+                                </tr>
+                                <tr>
+                                    <td>Create Model Metadata</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/models/</code></td>
+                                    <td>Admin</td>
+                                    <td>JSON body chứa model metadata mới.</td>
+                                </tr>
+                                <tr>
+                                    <td>Update Model Metadata</td>
+                                    <td><span class="method-pill">PUT</span></td>
+                                    <td><code>/api/models/</code></td>
+                                    <td>Admin</td>
+                                    <td>JSON body chứa metadata cần cập nhật.</td>
+                                </tr>
+                                <tr>
+                                    <td>Search Models</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/models/search</code></td>
+                                    <td>Admin</td>
+                                    <td>Query <code>keyword?</code> hoặc filter tùy instance.</td>
+                                </tr>
+                                <tr>
+                                    <td>Get Specific Model</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/models/{id}</code></td>
+                                    <td>Admin</td>
+                                    <td>Path <code>id</code> required.</td>
+                                </tr>
+                                <tr>
+                                    <td>Delete Model</td>
+                                    <td><span class="method-pill">DELETE</span></td>
+                                    <td><code>/api/models/{id}</code></td>
+                                    <td>Admin</td>
+                                    <td>Path <code>id</code> required.</td>
+                                </tr>
+                                <tr>
+                                    <td>Get Missing Models</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/models/missing</code></td>
+                                    <td>Admin</td>
+                                    <td>Tìm model có trong upstream/channel nhưng thiếu metadata nội bộ.</td>
+                                </tr>
+                                <tr>
+                                    <td>Preview Upstream Model Synchronization</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/models/sync_upstream/preview</code></td>
+                                    <td>Admin</td>
+                                    <td>Xem trước thay đổi khi đồng bộ model từ upstream.</td>
+                                </tr>
+                                <tr>
+                                    <td>Sync Upstream Models</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/models/sync_upstream</code></td>
+                                    <td>Admin</td>
+                                    <td>Đồng bộ model metadata từ upstream/channel.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+
+                <article class="docs-section" id="section-token-management" data-doc-title="Token Management"
+                    data-doc-search="token management create update get delete usage search tokens batch bearer auth">
+                    <div class="section-anchor-wrap">
+                        <h2>Token Management</h2><a class="heading-anchor" href="#section-token-management">#</a>
+                    </div>
+                    <p>
+                        Nhóm Token Management quản lý API tokens của người dùng: tạo token, cập nhật, xóa, tìm kiếm,
+                        batch delete và đọc usage theo token. Hầu hết endpoint yêu cầu người dùng đã đăng nhập; riêng
+                        usage endpoint dùng Bearer token authentication.
+                    </p>
+                    <h3>Endpoint summary</h3>
+                    <div class="docs-table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Operation</th>
+                                    <th>Method</th>
+                                    <th>Endpoint</th>
+                                    <th>Auth</th>
+                                    <th>Parameters/body</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Batch Delete Tokens</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/token/batch</code></td>
+                                    <td>User login</td>
+                                    <td>JSON body <code>ids?: array&lt;integer&gt;</code>.</td>
+                                </tr>
+                                <tr>
+                                    <td>Get All Tokens</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/token/</code></td>
+                                    <td>User login</td>
+                                    <td>Query <code>p?</code>, <code>page_size?</code>.</td>
+                                </tr>
+                                <tr>
+                                    <td>Delete Token</td>
+                                    <td><span class="method-pill">DELETE</span></td>
+                                    <td><code>/api/token/{id}</code></td>
+                                    <td>User login</td>
+                                    <td>Path <code>id</code> required.</td>
+                                </tr>
+                                <tr>
+                                    <td>Get Specified Token</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/token/{id}</code></td>
+                                    <td>User login</td>
+                                    <td>Path <code>id</code> required.</td>
+                                </tr>
+                                <tr>
+                                    <td>Create Token</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/token/</code></td>
+                                    <td>User login</td>
+                                    <td>JSON body chứa thông tin token mới.</td>
+                                </tr>
+                                <tr>
+                                    <td>Update Token</td>
+                                    <td><span class="method-pill">PUT</span></td>
+                                    <td><code>/api/token/</code></td>
+                                    <td>User login</td>
+                                    <td>JSON body chứa thông tin token cần cập nhật.</td>
+                                </tr>
+                                <tr>
+                                    <td>Search Tokens</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/token/search</code></td>
+                                    <td>User login</td>
+                                    <td>Query <code>keyword?</code>.</td>
+                                </tr>
+                                <tr>
+                                    <td>Get Token Usage</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/usage/token/</code></td>
+                                    <td>Bearer token</td>
+                                    <td>Header <code>Authorization: Bearer sk-xxxxxx</code>.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <h3>Token usage authentication</h3>
+                    <div class="hero-code-window docs-code-window">
+                        <div class="code-toolbar"><span>Authorization Header</span><button class="code-copy-btn"
+                                type="button" data-copy="Authorization: Bearer sk-xxxxxx">Copy</button></div>
+                        <pre class="code-block themed-code"><code>Authorization: Bearer sk-xxxxxx</code></pre>
+                    </div>
+                </article>
+
+                <article class="docs-section" id="section-redemption" data-doc-title="Redemption Codes"
+                    data-doc-search="redemption codes redeem exchange topup credit create update search invalid">
+                    <div class="section-anchor-wrap">
+                        <h2>Redemption Codes</h2><a class="heading-anchor" href="#section-redemption">#</a>
+                    </div>
+                    <p>
+                        Nhóm Redemption Codes phục vụ quản lý, tìm kiếm, tạo/xóa/cập nhật và sử dụng mã redeem trong
+                        luồng top-up hoặc business campaign.
+                    </p>
+                    <h3>Endpoint summary</h3>
+                    <div class="docs-table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Operation</th>
+                                    <th>Method</th>
+                                    <th>Endpoint</th>
+                                    <th>Auth</th>
+                                    <th>Parameters/body</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Get All Redemption Codes</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/redemption/</code></td>
+                                    <td>Admin</td>
+                                    <td>Query <code>p?</code>, <code>page_size?</code>.</td>
+                                </tr>
+                                <tr>
+                                    <td>Create Redemption Code</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/redemption/</code></td>
+                                    <td>Admin</td>
+                                    <td>JSON body chứa mã, quota/amount, số lần dùng hoặc batch config.</td>
+                                </tr>
+                                <tr>
+                                    <td>Update Redemption Code</td>
+                                    <td><span class="method-pill">PUT</span></td>
+                                    <td><code>/api/redemption/</code></td>
+                                    <td>Admin</td>
+                                    <td>JSON body chứa redemption code cần cập nhật.</td>
+                                </tr>
+                                <tr>
+                                    <td>Search Redemption Codes</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/redemption/search</code></td>
+                                    <td>Admin</td>
+                                    <td>Query <code>keyword?</code>, phân trang tùy instance.</td>
+                                </tr>
+                                <tr>
+                                    <td>Get Specific Redemption Code</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/redemption/{id}</code></td>
+                                    <td>Admin</td>
+                                    <td>Path <code>id</code> required.</td>
+                                </tr>
+                                <tr>
+                                    <td>Delete Redemption Code</td>
+                                    <td><span class="method-pill">DELETE</span></td>
+                                    <td><code>/api/redemption/{id}</code></td>
+                                    <td>Admin</td>
+                                    <td>Path <code>id</code> required.</td>
+                                </tr>
+                                <tr>
+                                    <td>Delete Invalid Redemption Codes</td>
+                                    <td><span class="method-pill">DELETE</span></td>
+                                    <td><code>/api/redemption/invalid</code></td>
+                                    <td>Admin</td>
+                                    <td>Xóa mã đã hết hạn, dùng hết lượt hoặc không còn hợp lệ.</td>
+                                </tr>
+                                <tr>
+                                    <td>Redeem Code</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/user/topup</code></td>
+                                    <td>User login</td>
+                                    <td>Body thường gồm redemption code để nạp quota/credit.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+
+                <article class="docs-section" id="section-payment" data-doc-title="Payment"
+                    data-doc-search="payment topup billing wallet recharge stripe creem epay amount webhook">
+                    <div class="section-anchor-wrap">
+                        <h2>Payment</h2><a class="heading-anchor" href="#section-payment">#</a>
+                    </div>
+                    <p>
+                        Payment và top-up interfaces phục vụ ví, nạp tiền, gói cước, cổng thanh toán Easy Pay, Stripe,
+                        Creem và webhook callback thương mại của nền tảng.
+                    </p>
+                    <h3>Endpoint summary</h3>
+                    <div class="docs-table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Operation</th>
+                                    <th>Method</th>
+                                    <th>Endpoint</th>
+                                    <th>Auth</th>
+                                    <th>Parameters/body</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Get Top-up Information</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/user/topup/info</code></td>
+                                    <td>User login</td>
+                                    <td>Lấy cấu hình top-up, gói nạp hoặc payment display.</td>
+                                </tr>
+                                <tr>
+                                    <td>Get User Top-up Records</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/user/topup/self</code></td>
+                                    <td>User login</td>
+                                    <td>Truy vấn lịch sử top-up của user hiện tại.</td>
+                                </tr>
+                                <tr>
+                                    <td>Get Payment Amount</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/user/amount</code></td>
+                                    <td>User login</td>
+                                    <td>Body chứa lựa chọn top-up để tính số tiền cần thanh toán.</td>
+                                </tr>
+                                <tr>
+                                    <td>Initiate Easy Payment</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/user/pay</code></td>
+                                    <td>User login</td>
+                                    <td>Tạo phiên thanh toán qua Easy Pay/Epay.</td>
+                                </tr>
+                                <tr>
+                                    <td>Epay Callback</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/user/epay/notify</code></td>
+                                    <td>Payment callback</td>
+                                    <td>Query callback từ Epay để xác nhận giao dịch.</td>
+                                </tr>
+                                <tr>
+                                    <td>Get Stripe Payment Amount</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/user/stripe/amount</code></td>
+                                    <td>User login</td>
+                                    <td>Tính số tiền/session amount cho Stripe checkout.</td>
+                                </tr>
+                                <tr>
+                                    <td>Initiate Stripe Payment</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/user/stripe/pay</code></td>
+                                    <td>User login</td>
+                                    <td>Tạo Stripe checkout/payment session.</td>
+                                </tr>
+                                <tr>
+                                    <td>Stripe Webhook</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/stripe/webhook</code></td>
+                                    <td>Webhook callback</td>
+                                    <td>Raw/provider payload từ Stripe, xác minh bằng secret phía backend.</td>
+                                </tr>
+                                <tr>
+                                    <td>Initiate Creem Payment</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/user/creem/pay</code></td>
+                                    <td>User login</td>
+                                    <td>Tạo phiên thanh toán qua Creem.</td>
+                                </tr>
+                                <tr>
+                                    <td>Creem Webhook</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/creem/webhook</code></td>
+                                    <td>Webhook callback</td>
+                                    <td>Callback từ Creem để hoàn tất top-up.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+
+                <article class="docs-section" id="section-logs" data-doc-title="Logs"
+                    data-doc-search="logs usage query request records self statistics token delete search audit">
+                    <div class="section-anchor-wrap">
+                        <h2>Logs</h2><a class="heading-anchor" href="#section-logs">#</a>
+                    </div>
+                    <p>
+                        Truy vấn usage logs, lịch sử request, thống kê cá nhân/toàn hệ thống, log theo token và dữ liệu
+                        kiểm toán vận hành.
+                    </p>
+                    <h3>Endpoint summary</h3>
+                    <div class="docs-table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Operation</th>
+                                    <th>Method</th>
+                                    <th>Endpoint</th>
+                                    <th>Auth</th>
+                                    <th>Parameters/body</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Get All Logs</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/log/</code></td>
+                                    <td>Admin</td>
+                                    <td>Query <code>p?</code>, <code>page_size?</code>.</td>
+                                </tr>
+                                <tr>
+                                    <td>Search Logs</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/log/search</code></td>
+                                    <td>Admin</td>
+                                    <td>Query keyword/filter, time range, model hoặc user tùy instance.</td>
+                                </tr>
+                                <tr>
+                                    <td>Delete Historical Logs</td>
+                                    <td><span class="method-pill">DELETE</span></td>
+                                    <td><code>/api/log/</code></td>
+                                    <td>Admin</td>
+                                    <td>Query hoặc body chọn mốc thời gian/log cần xóa theo policy.</td>
+                                </tr>
+                                <tr>
+                                    <td>Get Personal Logs</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/log/self</code></td>
+                                    <td>User login</td>
+                                    <td>Query <code>p?</code>, <code>page_size?</code>.</td>
+                                </tr>
+                                <tr>
+                                    <td>Search Personal Logs</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/log/self/search</code></td>
+                                    <td>User login</td>
+                                    <td>Query keyword/filter cho log của user hiện tại.</td>
+                                </tr>
+                                <tr>
+                                    <td>Get Personal Log Statistics</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/log/self/stat</code></td>
+                                    <td>User login</td>
+                                    <td>Thống kê usage/log của user hiện tại.</td>
+                                </tr>
+                                <tr>
+                                    <td>Get Log Statistics</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/log/stat</code></td>
+                                    <td>Admin</td>
+                                    <td>Thống kê log toàn hệ thống.</td>
+                                </tr>
+                                <tr>
+                                    <td>Get Logs by Token</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/log/token</code></td>
+                                    <td>User login / Admin</td>
+                                    <td>Query token id/key hoặc filter theo token.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+
+                <article class="docs-section" id="section-statistics" data-doc-title="Statistics"
+                    data-doc-search="statistics data quota usage metrics charts admin self">
+                    <div class="section-anchor-wrap">
+                        <h2>Statistics</h2><a class="heading-anchor" href="#section-statistics">#</a>
+                    </div>
+                    <p>
+                        Nhóm Statistics cung cấp dữ liệu quota/usage tổng hợp để hiển thị chi phí, metrics kinh doanh
+                        và dashboard cá nhân/toàn hệ thống.
+                    </p>
+                    <h3>Endpoint summary</h3>
+                    <div class="docs-table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Operation</th>
+                                    <th>Method</th>
+                                    <th>Endpoint</th>
+                                    <th>Auth</th>
+                                    <th>Parameters/body</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Get All Quota Data</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/data/</code></td>
+                                    <td>Admin</td>
+                                    <td>Lấy quota/usage data tổng hợp toàn hệ thống.</td>
+                                </tr>
+                                <tr>
+                                    <td>Get Personal Quota Data</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/data/self</code></td>
+                                    <td>User login</td>
+                                    <td>Lấy quota/usage data của user hiện tại.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+
+                <article class="docs-section" id="section-tasks" data-doc-title="Tasks"
+                    data-doc-search="tasks asynchronous jobs queue management midjourney self admin">
+                    <div class="section-anchor-wrap">
+                        <h2>Tasks</h2><a class="heading-anchor" href="#section-tasks">#</a>
+                    </div>
+                    <p>
+                        Asynchronous task management cho các công việc nền, trạng thái xử lý, Midjourney tasks và điều
+                        phối tác vụ dài hạn.
+                    </p>
+                    <h3>Endpoint summary</h3>
+                    <div class="docs-table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Operation</th>
+                                    <th>Method</th>
+                                    <th>Endpoint</th>
+                                    <th>Auth</th>
+                                    <th>Parameters/body</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Get All Tasks</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/task/</code></td>
+                                    <td>Admin</td>
+                                    <td>Lấy toàn bộ task nền trong hệ thống.</td>
+                                </tr>
+                                <tr>
+                                    <td>Get Personal Tasks</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/task/self</code></td>
+                                    <td>User login</td>
+                                    <td>Lấy task thuộc user hiện tại.</td>
+                                </tr>
+                                <tr>
+                                    <td>Get All Midjourney Tasks</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/mj/</code></td>
+                                    <td>Admin</td>
+                                    <td>Lấy toàn bộ Midjourney tasks nếu module được bật.</td>
+                                </tr>
+                                <tr>
+                                    <td>Get Personal Midjourney Tasks</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/mj/self</code></td>
+                                    <td>User login</td>
+                                    <td>Lấy Midjourney tasks của user hiện tại.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+
+                <article class="docs-section" id="section-groups" data-doc-title="Groups"
+                    data-doc-search="groups user group permissions prefill create update delete admin">
+                    <div class="section-anchor-wrap">
+                        <h2>Groups</h2><a class="heading-anchor" href="#section-groups">#</a>
+                    </div>
+                    <p>
+                        Quản lý user groups, chính sách phân quyền và prefill group configuration dùng khi tạo user,
+                        đăng ký hoặc cấu hình tổ chức người dùng.
+                    </p>
+                    <h3>Endpoint summary</h3>
+                    <div class="docs-table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Operation</th>
+                                    <th>Method</th>
+                                    <th>Endpoint</th>
+                                    <th>Auth</th>
+                                    <th>Parameters/body</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Get All Groups</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/group/</code></td>
+                                    <td>Admin</td>
+                                    <td>Lấy danh sách group/quyền trong hệ thống.</td>
+                                </tr>
+                                <tr>
+                                    <td>Get Prefill Group</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/prefill_group</code></td>
+                                    <td>Admin</td>
+                                    <td>Lấy cấu hình prefill group mặc định.</td>
+                                </tr>
+                                <tr>
+                                    <td>Create Prefill Group</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/prefill_group</code></td>
+                                    <td>Admin</td>
+                                    <td>JSON body chứa prefill group mới.</td>
+                                </tr>
+                                <tr>
+                                    <td>Update Prefill Group</td>
+                                    <td><span class="method-pill">PUT</span></td>
+                                    <td><code>/api/prefill_group</code></td>
+                                    <td>Admin</td>
+                                    <td>JSON body cập nhật prefill group.</td>
+                                </tr>
+                                <tr>
+                                    <td>Delete Prefill Group</td>
+                                    <td><span class="method-pill">DELETE</span></td>
+                                    <td><code>/api/prefill_group/{id}</code></td>
+                                    <td>Admin</td>
+                                    <td>Path <code>id</code> required.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+
+                <article class="docs-section" id="section-vendors" data-doc-title="Vendors"
+                    data-doc-search="vendors provider management upstream vendor create update delete search">
+                    <div class="section-anchor-wrap">
+                        <h2>Vendors</h2><a class="heading-anchor" href="#section-vendors">#</a>
+                    </div>
+                    <p>
+                        Vendor management cho các upstream providers, thông tin nhà cung cấp, metadata tích hợp và cấu
+                        hình vận hành liên quan.
+                    </p>
+                    <h3>Endpoint summary</h3>
+                    <div class="docs-table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Operation</th>
+                                    <th>Method</th>
+                                    <th>Endpoint</th>
+                                    <th>Auth</th>
+                                    <th>Parameters/body</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Get All Vendors</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/vendors/</code></td>
+                                    <td>Admin</td>
+                                    <td>Lấy danh sách vendors/provider metadata.</td>
+                                </tr>
+                                <tr>
+                                    <td>Create Vendor</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/vendors/</code></td>
+                                    <td>Admin</td>
+                                    <td>JSON body chứa vendor mới.</td>
+                                </tr>
+                                <tr>
+                                    <td>Update Vendor</td>
+                                    <td><span class="method-pill">PUT</span></td>
+                                    <td><code>/api/vendors/</code></td>
+                                    <td>Admin</td>
+                                    <td>JSON body chứa vendor cần cập nhật.</td>
+                                </tr>
+                                <tr>
+                                    <td>Search Vendors</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/vendors/search</code></td>
+                                    <td>Admin</td>
+                                    <td>Query <code>keyword?</code> hoặc filter provider.</td>
+                                </tr>
+                                <tr>
+                                    <td>Get Specific Vendor</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/vendors/{id}</code></td>
+                                    <td>Admin</td>
+                                    <td>Path <code>id</code> required.</td>
+                                </tr>
+                                <tr>
+                                    <td>Delete Vendor</td>
+                                    <td><span class="method-pill">DELETE</span></td>
+                                    <td><code>/api/vendors/{id}</code></td>
+                                    <td>Admin</td>
+                                    <td>Path <code>id</code> required.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+
+                <article class="docs-section" id="section-security-verification" data-doc-title="Security Verification"
+                    data-doc-search="security verification captcha email sms verify status abuse sensitive actions">
+                    <div class="section-anchor-wrap">
+                        <h2>Security Verification</h2><a class="heading-anchor"
+                            href="#section-security-verification">#</a>
+                    </div>
+                    <p>
+                        Nhóm endpoint xác minh bảo mật, trạng thái verify và các bước chống abuse trước khi cho phép thao
+                        tác nhạy cảm như thanh toán, đổi thông tin tài khoản hoặc thao tác rủi ro cao.
+                    </p>
+                    <h3>Endpoint summary</h3>
+                    <div class="docs-table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Operation</th>
+                                    <th>Method</th>
+                                    <th>Endpoint</th>
+                                    <th>Auth</th>
+                                    <th>Parameters/body</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Get Verification Status</td>
+                                    <td><span class="method-pill">GET</span></td>
+                                    <td><code>/api/verify/status</code></td>
+                                    <td>User login</td>
+                                    <td>Kiểm tra user/session hiện tại đã qua xác minh bảo mật hay chưa.</td>
+                                </tr>
+                                <tr>
+                                    <td>General Security Verification</td>
+                                    <td><span class="method-pill">POST</span></td>
+                                    <td><code>/api/verify</code></td>
+                                    <td>User login</td>
+                                    <td>Body chứa verification code/captcha/token tùy cơ chế được bật.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+            </section>
+        </div>
+    </main>
+
+    <button class="docs-back-to-top" id="backToTopBtn" type="button" aria-label="Back to top">↑</button>
+
+    <script src="/js/state.js"></script>
+    <script src="../js/login.js"></script>
+    <script src="../js/dashboard.js"></script>
+    <script src="../js/translations.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="../js/docs.js"></script>
+</body>
+
+</html>

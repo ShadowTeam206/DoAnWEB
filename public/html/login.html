@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI STORE · Đăng nhập</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/login.css" />
+</head>
+
+<body>
+    <div class="login-background" aria-hidden="true">
+        <div class="login-background__blur login-background__blur--one"></div>
+        <div class="login-background__blur login-background__blur--two"></div>
+        <div class="login-background__noise"></div>
+    </div>
+
+    <main class="login-layout" aria-label="AI STORE login page">
+        <section class="login-showcase" aria-label="Product overview">
+            <a class="brand" href="/" aria-label="AI STORE home">
+                <img src="../AI_STORE.png" alt="AI STORE logo" class="brand__logo" />
+                <span class="brand__text">AI STORE</span>
+            </a>
+
+            <div class="showcase-stack">
+                <div class="showcase-copy">
+                    <a class="pill-badge pill-badge--link" href="/">← Về trang chủ</a>
+                    <h1>Quản lý toàn bộ hệ sinh thái AI của bạn</h1>
+                    <p>
+                        Theo dõi API, quản lý mô hình, thống kê sử dụng và vận hành hệ thống từ một dashboard duy nhất.
+                    </p>
+                </div>
+
+                <div class="social-proof" aria-label="Platform stats">
+                    <article class="social-proof__item">
+                        <strong>10,000+</strong>
+                        <span>Requests mỗi ngày</span>
+                    </article>
+                    <article class="social-proof__item">
+                        <strong>99.9%</strong>
+                        <span>Uptime</span>
+                    </article>
+                    <article class="social-proof__item">
+                        <strong>50+</strong>
+                        <span>AI Models</span>
+                    </article>
+                </div>
+
+                <div class="feature-grid" aria-label="Platform capabilities">
+                    <article class="feature-card">
+                        <span class="feature-card__icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 13h4l3-8 4 14 3-6h2" />
+                            </svg>
+                        </span>
+                        <div class="feature-card__content">
+                            <h2>Quan sát theo thời gian thực</h2>
+                            <p>Nắm được lưu lượng, độ ổn định và mức tiêu thụ API trên một giao diện trực quan.</p>
+                        </div>
+                    </article>
+
+                    <article class="feature-card">
+                        <span class="feature-card__icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="4" width="18" height="16" rx="3" />
+                                <path d="M7 8h10" />
+                                <path d="M7 12h6" />
+                                <path d="M7 16h8" />
+                            </svg>
+                        </span>
+                        <div class="feature-card__content">
+                            <h2>Quản trị mô hình tập trung</h2>
+                            <p>Kết nối nhiều model, chuẩn hóa endpoint và kiểm soát truy cập trong cùng một nơi.</p>
+                        </div>
+                    </article>
+
+                    <article class="feature-card">
+                        <span class="feature-card__icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 3l7 4v10l-7 4-7-4V7l7-4Z" />
+                                <path d="M12 7v10" />
+                                <path d="m8.5 9 7 4" />
+                                <path d="m15.5 9-7 4" />
+                            </svg>
+                        </span>
+                        <div class="feature-card__content">
+                            <h2>Vận hành ở quy mô production</h2>
+                            <p>Phù hợp cho team cần một cổng quản trị rõ ràng, ổn định và sẵn sàng mở rộng.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="login-panel" aria-label="Sign in form">
+            <div class="login-card fade-in">
+                <header class="login-card__header">
+                    <h2>Đăng nhập Dashboard</h2>
+                    <p>Nhập mã truy cập để đăng nhập vào hệ thống quản trị.</p>
+                </header>
+
+                <div id="resumeBox" class="resume-box hidden">
+                    <button type="button" id="resumeBtn" class="submit-button">Tiếp tục</button>
+                </div>
+
+                <form id="loginPageForm" class="login-form" novalidate>
+                    <div class="input-group" id="apiKeyField">
+                        <input id="apiKeyInput" name="apiKey" type="password" autocomplete="off" placeholder=" "
+                            required />
+                        <label for="apiKeyInput">Mã truy cập</label>
+                        <button type="button" class="input-action" id="toggleApiKey"
+                            aria-label="Hiển thị hoặc ẩn mã truy cập">
+                            Hiện
+                        </button>
+                    </div>
+
+                    <div class="form-row">
+                        <label class="checkbox-field" for="rememberApiKey">
+                            <input id="rememberApiKey" type="checkbox" checked />
+                            <span>Ghi nhớ thiết bị này</span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="submit-button">Đăng nhập</button>
+                </form>
+
+<!-- Google Login Option -->
+                <div class="google-login-option">
+                    <button type="button" id="googleLoginBtn" class="google-login-btn">
+                        <!-- Google Logo (Official SVG) -->
+                        <svg width="20" height="20" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                            <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+                            <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+                            <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+                            <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+                        </svg>
+                        <span>Đăng nhập với Google</span>
+                    </button>
+                </div>
+
+                <p id="loginStatusMessage" class="form-status" aria-live="polite"></p>
+
+                <footer class="login-card__footer">
+                    <span class="security-badge" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 3l7 4v5c0 5-3.5 8.5-7 9-3.5-.5-7-4-7-9V7l7-4Z" />
+                            <path d="M9.5 12.5 11 14l3.5-4" />
+                        </svg>
+                    </span>
+                    <span>Được bảo mật bởi mã hóa đầu cuối</span>
+                </footer>
+            </div>
+        </section>
+    </main>
+
+    <script src="/js/state.js"></script>
+    <script src="../js/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI STORE · Bảng xếp hạng</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="../css/dashboard.css" />
+    <link rel="stylesheet" href="../css/rankings.css" />
+</head>
+
+<body>
+    <header class="site-header dashboard-header">
+        <div class="site-header-inner">
+            <div class="brand brand-linklike">
+                <img class="brand-logo" src="../AI_STORE.png" alt="AI STORE logo" />
+                <div>
+                    <div class="brand-kicker">AI STORE</div>
+                    <div class="brand-name">AI STORE</div>
+                </div>
+            </div>
+
+            <nav class="site-nav">
+                <a href="/" data-i18n="navHome">Trang chủ</a>
+                <a href="javascript:void(0)" onclick="goToConsole()" data-i18n="navConsole">Bảng điều khiển</a>
+                <a href="/models" data-i18n="navModels">Mô hình</a>
+                <a href="/rankings" class="is-active" data-i18n="navRanking">Bảng xếp hạng</a>
+                <a href="/docs" data-i18n="navDocs">Tài liệu</a>
+            </nav>
+
+            <div class="header-actions">
+                <div class="language-switcher">
+                    <button class="ghost-icon-btn" id="languageToggle" type="button" aria-haspopup="true"
+                        aria-expanded="false">文</button>
+                    <div class="language-menu hidden" id="languageMenu">
+                        <button type="button" data-lang="vi">Tiếng Việt</button>
+                        <button type="button" data-lang="en">English</button>
+                        <button type="button" data-lang="zh">中文</button>
+                        <button type="button" data-lang="ja">日本語</button>
+                    </div>
+                </div>
+                <div class="theme-switcher">
+                    <button class="ghost-icon-btn svg-icon-btn" id="themeToggle" type="button" aria-haspopup="true"
+                        aria-expanded="false" aria-label="Theme switcher">
+                        <span class="theme-icon theme-icon-moon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"></path>
+                            </svg>
+                        </span>
+                        <span class="theme-icon theme-icon-sun" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="4"></circle>
+                                <path d="M12 2v2.5"></path>
+                                <path d="M12 19.5V22"></path>
+                                <path d="M4.93 4.93l1.77 1.77"></path>
+                                <path d="M17.3 17.3l1.77 1.77"></path>
+                                <path d="M2 12h2.5"></path>
+                                <path d="M19.5 12H22"></path>
+                                <path d="M4.93 19.07l1.77-1.77"></path>
+                                <path d="M17.3 6.7l1.77-1.77"></path>
+                            </svg>
+                        </span>
+                    </button>
+                    <div class="theme-menu hidden" id="themeMenu">
+                        <button type="button" data-theme="dark">Tối</button>
+                        <button type="button" data-theme="light">Ánh Sáng</button>
+                    </div>
+                </div>
+                <div class="notification-switcher">
+                    <button class="ghost-icon-btn svg-icon-btn" id="notificationToggle" type="button"
+                        aria-haspopup="true" aria-expanded="false" aria-label="Notifications">
+                        <span class="notification-dot"></span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M15 17h5l-1.4-1.4A2 2 0 0 1 18 14.2V11a6 6 0 1 0-12 0v3.2a2 2 0 0 1-.6 1.4L4 17h5">
+                            </path>
+                            <path d="M9 17a3 3 0 0 0 6 0"></path>
+                        </svg>
+                    </button>
+                    <div class="notification-menu hidden" id="notificationMenu">
+                        <div class="notification-header">
+                            <span>Thông báo</span>
+                            <span class="notification-count">01</span>
+                        </div>
+                        <article class="notification-card">
+                            <div class="notification-tag">Rankings</div>
+                            <h4>Bảng xếp hạng đã được cập nhật</h4>
+                            <p>Dữ liệu token usage và mức độ phổ biến mô hình đang được làm mới theo thời gian thực.</p>
+                            <div class="notification-time">Vừa xong · curated for your workspace</div>
+                        </article>
+                    </div>
+                </div>
+                <button class="nav-login-btn" id="loginTriggerBtn" type="button" onclick="showLoginPanel()">Đăng
+                    nhập</button>
+                <div class="user-menu-wrap hidden" id="userMenuWrap">
+                    <button class="user-menu-trigger" id="userMenuTrigger" type="button" aria-haspopup="true"
+                        aria-expanded="false" aria-label="User menu">
+                        <span class="user-avatar" id="userAvatar">AI</span>
+                        <span class="user-meta">
+                            <strong id="userDisplayName">Người dùng</strong>
+                            <small id="userDisplayPlan">Tài khoản hệ thống</small>
+                        </span>
+                    </button>
+                    <div class="user-menu-dropdown hidden" id="userMenuDropdown" role="menu">
+                        <button class="user-menu-item" type="button" role="menuitem" data-user-action="profile">
+                            <svg class="user-menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-6 8-6s8 2 8 6"/></svg>
+                            <span data-i18n="navProfile">Hồ sơ</span>
+                        </button>
+                        <button class="user-menu-item user-menu-item-danger" type="button" role="menuitem" data-user-action="logout">
+                            <svg class="user-menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h4"/><path d="M16 8l4 4-4 4"/><path d="M20 12H9"/></svg>
+                            <span data-i18n="navLogout">Đăng xuất</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-shell rankings-shell">
+        <div class="rankings-header">
+            <h1>Bảng xếp hạng</h1>
+            <p class="rankings-subtitle">Khám phá các mô hình được sử dụng nhiều nhất trên nền tảng, được cập nhật từ dữ
+                liệu sử dụng thực tế.</p>
+        </div>
+
+        <div class="rankings-period-tabs" id="rankingsPeriodTabs">
+            <button type="button" data-period="today">Hôm nay</button>
+            <button type="button" data-period="week" class="active">Tuần</button>
+            <button type="button" data-period="month">Tháng</button>
+            <button type="button" data-period="year">Năm</button>
+            <button type="button" data-period="all">Tất cả</button>
+        </div>
+
+        <section class="rankings-section rankings-top-models">
+            <div class="section-heading">
+                <h2>Mô hình hàng đầu</h2>
+                <p>Các mô hình có mức sử dụng cao nhất trong giai đoạn đã chọn</p>
+            </div>
+
+            <div id="rankingsChartShell" class="rankings-chart-shell">
+                <div class="rankings-chart-legend">
+                    <span class="legend-dot"></span>
+                    <span id="rankingsChartLegend">Lượt dùng theo giờ</span>
+                </div>
+                <div id="rankingsChartLoading" class="rankings-state-empty" style="display:none;">
+                    <div class="rankings-spinner"></div>
+                    <span>Đang tải biểu đồ theo giờ...</span>
+                </div>
+                <div id="rankingsChartError" class="rankings-state-empty" style="display:none;">
+                    <span>Không thể tải biểu đồ theo giờ.</span>
+                </div>
+                <div id="rankingsChartWrap" class="rankings-hourly-chart" aria-label="Biểu đồ cột theo giờ">
+                    <svg id="rankingsChart" class="chart-svg" viewBox="0 0 1200 420" preserveAspectRatio="none"></svg>
+                </div>
+                <div id="rankingsChartTooltip" class="rankings-chart-tooltip hidden"></div>
+            </div>
+        </section>
+
+        <section class="rankings-section rankings-leaderboard">
+            <div class="section-heading">
+                <h2>Bảng xếp hạng</h2>
+                <p>So sánh các mô hình phổ biến nhất trên nền tảng</p>
+            </div>
+
+            <div class="rankings-two-column-board">
+                <ol id="rankingsLeftColumn" class="rankings-list rankings-column-list"></ol>
+                <ol id="rankingsRightColumn" class="rankings-list rankings-column-list"></ol>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="loginMount"></div>
+    <div id="dashboardMount"></div>
+
+    <script src="/js/state.js"></script>
+    <script src="../js/login.js"></script>
+    <script src="../js/rankings.js"></script>
+    <script src="../js/dashboard.js"></script>
+    <script src="../js/translations.js"></script>
+    <script src="/js/app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI STORE · Mô hình</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="../css/dashboard.css" />
+    <link rel="stylesheet" href="../css/models.css" />
+</head>
+
+<body>
+    <header class="site-header dashboard-header">
+        <div class="site-header-inner">
+            <a class="brand brand-linklike" href="/" aria-label="AI STORE home">
+                <img class="brand-logo" src="../AI_STORE.png" alt="AI STORE logo" />
+                <div>
+                    <div class="brand-kicker" data-i18n="brandKicker">AI STORE</div>
+                    <div class="brand-name" data-i18n="brandName">AI STORE</div>
+                </div>
+            </a>
+
+            <nav class="site-nav">
+                <a href="/" data-i18n="navHome">Trang chủ</a>
+                <a href="/dashboard" data-i18n="navConsole">Bảng điều khiển</a>
+                <a href="/models" class="is-active" data-i18n="navModels">Mô hình</a>
+                <a href="/rankings" data-i18n="navRanking">Bảng xếp hạng</a>
+                <a href="/docs" data-i18n="navDocs">Tài liệu</a>
+            </nav>
+
+            <div class="header-actions">
+                <div class="language-switcher">
+                    <button class="ghost-icon-btn" id="languageToggle" type="button" aria-haspopup="true" aria-expanded="false">文</button>
+                    <div class="language-menu hidden" id="languageMenu">
+                        <button type="button" data-lang="vi">Tiếng Việt</button>
+                        <button type="button" data-lang="en">English</button>
+                        <button type="button" data-lang="zh">中文</button>
+                        <button type="button" data-lang="ja">日本語</button>
+                    </div>
+                </div>
+                <div class="theme-switcher">
+                    <button class="ghost-icon-btn svg-icon-btn" id="themeToggle" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Theme switcher">
+                        <span class="theme-icon theme-icon-moon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"></path>
+                            </svg>
+                        </span>
+                        <span class="theme-icon theme-icon-sun" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="4"></circle>
+                                <path d="M12 2v2.5"></path>
+                                <path d="M12 19.5V22"></path>
+                                <path d="M4.93 4.93l1.77 1.77"></path>
+                                <path d="M17.3 17.3l1.77 1.77"></path>
+                                <path d="M2 12h2.5"></path>
+                                <path d="M19.5 12H22"></path>
+                                <path d="M4.93 19.07l1.77-1.77"></path>
+                                <path d="M17.3 6.7l1.77-1.77"></path>
+                            </svg>
+                        </span>
+                    </button>
+                    <div class="theme-menu hidden" id="themeMenu">
+                        <button type="button" data-theme="dark">Tối</button>
+                        <button type="button" data-theme="light">Ánh Sáng</button>
+                    </div>
+                </div>
+                <div class="notification-switcher">
+                    <button class="ghost-icon-btn svg-icon-btn" id="notificationToggle" type="button" aria-haspopup="true" aria-expanded="false" aria-label="Notifications">
+                        <span class="notification-dot"></span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M15 17h5l-1.4-1.4A2 2 0 0 1 18 14.2V11a6 6 0 1 0-12 0v3.2a2 2 0 0 1-.6 1.4L4 17h5"></path>
+                            <path d="M9 17a3 3 0 0 0 6 0"></path>
+                        </svg>
+                    </button>
+                    <div class="notification-menu hidden" id="notificationMenu">
+                        <div class="notification-header">
+                            <span data-i18n="notificationHeader">Thông báo</span>
+                            <span class="notification-count">01</span>
+                        </div>
+                        <article class="notification-card">
+                            <div class="notification-tag" data-i18n="notificationTag">Model Square</div>
+                            <h4 data-i18n="notificationTitle">Danh sách mô hình đã được đồng bộ</h4>
+                            <p data-i18n="notificationDescription">Bạn có thể tìm kiếm, lọc và sao chép model ngay trong giao diện riêng của AI STORE.</p>
+                            <div class="notification-time" data-i18n="notificationTime">Vừa xong · curated for your workspace</div>
+                        </article>
+                    </div>
+                </div>
+                <button class="nav-login-btn" id="loginTriggerBtn" type="button" onclick="showLoginPanel()" data-i18n="signIn">Đăng nhập</button>
+                <div class="user-menu-wrap hidden" id="userMenuWrap">
+                    <button class="user-menu-trigger" id="userMenuTrigger" type="button" aria-haspopup="true" aria-expanded="false" aria-label="User menu">
+<span class="user-avatar" id="userAvatar" data-i18n="userAvatar">AI</span>
+                    <span class="user-meta">
+                        <strong id="userDisplayName" data-i18n="userDisplayName">Người dùng</strong>
+                        <small id="userDisplayPlan" data-i18n="userDisplayPlan">Tài khoản hệ thống</small>
+                    </span>
+                    </button>
+                    <div class="user-menu-dropdown hidden" id="userMenuDropdown" role="menu">
+                        <button class="user-menu-item" type="button" role="menuitem" data-user-action="profile">
+                            <svg class="user-menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-6 8-6s8 2 8 6"/></svg>
+                            <span data-i18n="navProfile">Hồ sơ</span>
+                        </button>
+                        <button class="user-menu-item user-menu-item-danger" type="button" role="menuitem" data-user-action="logout">
+                            <svg class="user-menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h4"/><path d="M16 8l4 4-4 4"/><path d="M20 12H9"/></svg>
+                            <span data-i18n="navLogout">Đăng xuất</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-shell models-page-shell">
+        <div id="modelsSectionMount"></div>
+    </main>
+
+    <div id="loginMount"></div>
+
+    <script src="/js/state.js"></script>
+    <script src="../js/login.js"></script>
+    <script src="../js/dashboard.js"></script>
+    <script src="../js/model-metadata.js"></script>
+    <script src="../js/models.js"></script>
+    <script src="../js/translations.js"></script>
+    <script src="/js/app.js"></script>
+</body>
+
+</html>

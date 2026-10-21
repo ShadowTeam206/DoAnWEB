@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI STORE · Bảng điều khiển</title>
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="../css/dashboard.css" />
+    <link rel="stylesheet" href="../css/profile.css" />
+</head>
+
+<body class="dashboard-layout">
+    <main id="dashboard" class="console-shell">
+        <button class="console-mobile-toggle" id="consoleMobileToggle" type="button" aria-label="Menu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <path d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        </button>
+
+        <aside class="console-sidebar" id="consoleSidebar" aria-label="Dashboard navigation">
+            <a class="console-brand" href="/">
+                <img src="../AI_STORE.png" alt="AI STORE" />
+                <span>AI STORE</span>
+            </a>
+
+            <nav class="console-nav">
+                <span class="console-nav-label">General</span>
+                <button class="console-nav-item is-active" type="button" data-panel="dashboardPanel">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <rect x="3" y="3" width="7" height="9" rx="1.5" />
+                        <rect x="14" y="3" width="7" height="5" rx="1.5" />
+                        <rect x="14" y="12" width="7" height="9" rx="1.5" />
+                        <rect x="3" y="16" width="7" height="5" rx="1.5" />
+                    </svg>
+                    <span>Dashboard</span>
+                </button>
+                <a class="console-nav-item" href="/models">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                        <path d="M2 17l10 5 10-5" />
+                        <path d="M2 12l10 5 10-5" />
+                    </svg>
+                    <span>Models</span>
+                </a>
+                <button class="console-nav-item" type="button" data-panel="playgroundPanel">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                    </svg>
+                    <span>Playground</span>
+                </button>
+
+                <span class="console-nav-label">Developer</span>
+                <button class="console-nav-item" type="button" data-panel="apiKeysPanel">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 2l-2 2m-7.6 7.6a5 5 0 1 0-1.4 1.4l3.6-3.6m5.4-5.4l-3 3m0 0l2 2" />
+                        <circle cx="6.5" cy="17.5" r="3.5" />
+                    </svg>
+                    <span>API Keys</span>
+                </button>
+                <button class="console-nav-item" type="button" data-panel="usagePanel">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M3 3v18h18" />
+                        <path d="M7 14l3-3 3 3 5-6" />
+                    </svg>
+                    <span>Usage</span>
+                </button>
+                <button class="console-nav-item" type="button" data-panel="billingPanel">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <rect x="2" y="5" width="20" height="14" rx="2" />
+                        <path d="M2 10h20" />
+                    </svg>
+                    <span>Billing</span>
+                </button>
+
+                <span class="console-nav-label">Account</span>
+                <button class="console-nav-item" type="button" data-panel="profilePanel">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M20 21a8 8 0 0 0-16 0" />
+                        <circle cx="12" cy="8" r="4" />
+                    </svg>
+                    <span>Profile</span>
+                </button>
+                <button class="console-nav-item" type="button" data-panel="settingsPanel">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="3" />
+                        <path
+                            d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                    </svg>
+                    <span>Settings</span>
+                </button>
+            </nav>
+        </aside>
+
+        <section class="console-main">
+            <!-- ================= DASHBOARD ================= -->
+            <section class="console-panel is-active" id="dashboardPanel">
+                <header class="console-topbar">
+                    <div class="console-topbar-text">
+                        <h1>Dashboard</h1>
+                        <p id="welcomeBack">Welcome back</p>
+                    </div>
+                </header>
+
+                <!-- ROW 1: stats -->
+                <div class="stat-grid" id="statGrid">
+                    <article class="stat-card">
+                        <div class="stat-top"><span class="stat-label">Balance</span><span class="stat-ic">$</span>
+                        </div>
+                        <div class="stat-value" id="statBalance">—</div>
+                        <div class="stat-sub" id="statBalanceSub">Số dư khả dụng</div>
+                    </article>
+                    <article class="stat-card">
+                        <div class="stat-top"><span class="stat-label">API Keys</span></div>
+                        <div class="stat-value" id="statKeys">—</div>
+                        <div class="stat-sub">Khóa đang hoạt động</div>
+                    </article>
+                    <article class="stat-card">
+                        <div class="stat-top"><span class="stat-label">Total Usage</span></div>
+                        <div class="stat-value" id="statUsage">—</div>
+                        <div class="stat-sub">Chi tiêu tích lũy</div>
+                    </article>
+                    <article class="stat-card">
+                        <div class="stat-top"><span class="stat-label">Models</span></div>
+                        <div class="stat-value" id="statModels">—</div>
+                        <div class="stat-sub">Mô hình khả dụng</div>
+                    </article>
+                </div>
+
+                <!-- ROW 2: playground mini + account -->
+                <div class="console-row2">
+                    <section class="console-card pg-mini">
+                        <div class="card-head">
+                            <h2>Quick Playground</h2>
+                            <div class="model-combo" id="modelComboMini">
+                                <input type="text" id="chatModel" class="model-combo-input" autocomplete="off"
+                                    spellcheck="false" placeholder="Tìm model..." />
+                                <button type="button" class="model-combo-caret" aria-label="Mở danh sách">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M6 9l6 6 6-6" />
+                                    </svg>
+                                </button>
+                                <div class="model-combo-list" id="modelComboListMini" hidden></div>
+                            </div>
+                        </div>
+                        <div class="pg-mini-response" id="pgMiniResponse">
+                            <div class="pg-mini-empty">Phản hồi sẽ hiển thị ở đây.</div>
+                        </div>
+                        <div class="pg-mini-input">
+                            <textarea id="chatInput" class="console-textarea" rows="1"
+                                placeholder="Nhập prompt để thử nhanh..."></textarea>
+                            <button type="button" id="sendChatBtn" class="console-send-btn" aria-label="Gửi">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M22 2L11 13" />
+                                    <path d="M22 2l-7 20-4-9-9-4 20-7z" />
+                                </svg>
+                            </button>
+                        </div>
+                    </section>
+
+                    <aside class="console-card account-card">
+                        <div class="card-head">
+                            <h2>Account Overview</h2>
+                        </div>
+                        <dl class="account-list">
+                            <div>
+                                <dt>User ID</dt>
+                                <dd id="accUserId">—</dd>
+                            </div>
+                            <div>
+                                <dt>Current Plan</dt>
+                                <dd id="accPlan">—</dd>
+                            </div>
+                            <div>
+                                <dt>Status</dt>
+                                <dd id="accStatus"><span class="badge badge-ok">—</span></dd>
+                            </div>
+                            <div>
+                                <dt>Credits</dt>
+                                <dd id="accCredits">—</dd>
+                            </div>
+                            <div>
+                                <dt>API Endpoint</dt>
+                                <dd id="accEndpoint" class="mono">—</dd>
+                            </div>
+                        </dl>
+                    </aside>
+                </div>
+
+                <!-- ROW 3: recent activity -->
+                <section class="console-card">
+                    <div class="card-head">
+                        <h2>Recent Activity</h2>
+                        <span class="card-head-note">Lịch sử Quick Playground</span>
+                    </div>
+                    <div class="rh-table" id="activityTable">
+                        <div class="rh-head">
+                            <div>Time</div>
+                            <div>Action</div>
+                            <div>Model</div>
+                            <div class="ta-r">Status</div>
+                        </div>
+                        <div class="rh-body" id="activityBody"></div>
+                    </div>
+                </section>
+            </section>
+
+            <!-- ================= PLAYGROUND ================= -->
+            <section class="console-panel" id="playgroundPanel">
+                <header class="console-topbar">
+                    <div class="console-topbar-text">
+                        <h1>Playground</h1>
+                        <p>Thử nghiệm chat completion trực tiếp</p>
+                    </div>
+                    <div class="console-topbar-actions">
+                        <div class="model-combo model-combo-wide" id="modelComboFull">
+                            <input type="text" id="chatModelFull" class="model-combo-input" autocomplete="off"
+                                spellcheck="false" placeholder="Tìm model..." />
+                            <button type="button" class="model-combo-caret" aria-label="Mở danh sách">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M6 9l6 6 6-6" />
+                                </svg>
+                            </button>
+                            <div class="model-combo-list" id="modelComboListFull" hidden></div>
+                        </div>
+                        <label class="pg-mini-stream"><input type="checkbox" id="streamModeFull" checked />
+                            <span>Stream</span></label>
+                    </div>
+                </header>
+
+                <section class="console-card pg-full" id="pgFullDropzone">
+                    <div class="pg-drop-hint" id="pgDropHint" hidden>
+                        <div class="pg-drop-hint-inner">
+                            <strong>Thả ảnh, file hoặc thư mục vào đây</strong>
+                            <span>Hệ thống sẽ tự thêm vào đoạn chat và hiển thị preview ngay.</span>
+                        </div>
+                    </div>
+                    <div id="chatMessages" class="chat-messages"></div>
+                    <div class="pg-attachments" id="pgAttachments" hidden></div>
+                    <div class="pg-full-input">
+                        <div class="pg-input-actions">
+                            <div class="pg-attach" id="pgAttach">
+                                <button type="button" id="pgAttachBtn" class="pg-attach-btn" aria-haspopup="true"
+                                    aria-expanded="false" aria-label="Đính kèm" title="Đính kèm ảnh / thư mục">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path
+                                            d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48" />
+                                    </svg>
+                                </button>
+                                <div class="pg-attach-menu" id="pgAttachMenu" role="menu" hidden>
+                                    <button type="button" class="pg-attach-item" id="pgAttachImagesBtn" role="menuitem">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <rect x="3" y="3" width="18" height="18" rx="2" />
+                                            <circle cx="8.5" cy="8.5" r="1.5" />
+                                            <path d="M21 15l-5-5L5 21" />
+                                        </svg>
+                                        <span>Tải ảnh lên</span>
+                                    </button>
+                                    <button type="button" class="pg-attach-item" id="pgAttachFolderBtn" role="menuitem">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path
+                                                d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                                        </svg>
+                                        <span>Tải thư mục</span>
+                                    </button>
+                                    <button type="button" class="pg-attach-item" id="pgAttachFilesBtn" role="menuitem">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                                            stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                            <path d="M14 2v6h6" />
+                                            <path d="M8 13h8" />
+                                            <path d="M8 17h5" />
+                                        </svg>
+                                        <span>Tải file</span>
+                                    </button>
+                                </div>
+                                <input type="file" id="pgFileImages" accept="image/*" multiple hidden />
+                                <input type="file" id="pgFileFolder" webkitdirectory directory multiple hidden />
+                                <input type="file" id="pgFileGeneric" multiple hidden />
+                            </div>
+                            <button type="button" id="pgWebSearchToggle" class="pg-tool-toggle is-active"
+                                aria-pressed="true" title="Bật/tắt Web Search">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <circle cx="11" cy="11" r="7"></circle>
+                                    <path d="M21 21l-4.35-4.35"></path>
+                                    <path d="M8 11h6"></path>
+                                    <path d="M11 8v6"></path>
+                                </svg>
+                                <span>Web Search</span>
+                                <span class="pg-tool-toggle-badge" id="pgWebSearchBadge">On</span>
+                            </button>
+                        </div>
+                        <textarea id="chatInputFull" class="console-textarea" rows="1"
+                            placeholder="Nhập tin nhắn..."></textarea>
+                        <button type="button" id="sendChatBtnFull" class="console-send-btn" aria-label="Gửi">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 2L11 13" />
+                                <path d="M22 2l-7 20-4-9-9-4 20-7z" />
+                            </svg>
+                        </button>
+                    </div>
+                </section>
+
+                <section class="console-card">
+                    <div class="card-head">
+                        <h2>Request History</h2><button type="button" class="console-link-btn" id="clearHistoryBtn">Xóa
+                            lịch sử</button>
+                    </div>
+                    <div class="rh-table" id="historyTable">
+                        <div class="rh-head rh-head-full">
+                            <div>Time</div>
+                            <div>Model</div>
+                            <div class="ta-r">Tokens</div>
+                            <div class="ta-c">Status</div>
+                            <div class="ta-r">Latency</div>
+                            <div class="ta-r">View</div>
+                        </div>
+                        <div class="rh-body rh-body-paged" id="historyBody"></div>
+                    </div>
+                    <div class="rh-footer" id="historyFooter" hidden>
+                        <span class="rh-range" id="historyRange"></span>
+                        <div class="rh-pager">
+                            <button type="button" id="historyPrev" aria-label="Trang trước">‹</button>
+                            <span id="historyPageInd">1 / 1</span>
+                            <button type="button" id="historyNext" aria-label="Trang sau">›</button>
+                        </div>
+                    </div>
+                </section>
+            </section>
+
+            <!-- ================= API KEYS ================= -->
+            <section class="console-panel" id="apiKeysPanel">
+                <header class="console-topbar">
+                    <div class="console-topbar-text">
+                        <h1>API Keys</h1>
+                        <p>Kéo để sắp xếp · khóa trên cùng là khóa chính</p>
+                    </div>
+                    <div class="console-topbar-actions">
+                        <button type="button" class="console-btn" id="keysAddBtn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 5v14M5 12h14" />
+                            </svg>
+                            <span>Thêm key</span>
+                        </button>
+                        <button type="button" class="console-btn console-btn-primary" id="keysSaveBtn" hidden>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z" />
+                                <path d="M17 21v-8H7v8M7 3v5h8" />
+                            </svg>
+                            <span>Lưu thay đổi</span>
+                        </button>
+                    </div>
+                </header>
+                <div class="keys-status" id="keysStatus" hidden></div>
+                <div class="keys-grid" id="keysGrid"></div>
+            </section>
+
+            <!-- ================= USAGE ================= -->
+            <section class="console-panel" id="usagePanel">
+                <header class="console-topbar">
+                    <div class="console-topbar-text">
+                        <h1>Usage</h1>
+                        <p>Mức tiêu thụ tài nguyên</p>
+                    </div>
+                </header>
+                <div class="stat-grid stat-grid-3">
+                    <article class="stat-card">
+                        <div class="stat-top"><span class="stat-label">Total Usage</span></div>
+                        <div class="stat-value" id="usageTotal">—</div>
+                        <div class="stat-sub">Chi tiêu tích lũy</div>
+                    </article>
+                    <article class="stat-card">
+                        <div class="stat-top"><span class="stat-label">Balance</span></div>
+                        <div class="stat-value" id="usageBalance">—</div>
+                        <div class="stat-sub">Số dư còn lại</div>
+                    </article>
+                    <article class="stat-card">
+                        <div class="stat-top"><span class="stat-label">Requests (phiên)</span></div>
+                        <div class="stat-value" id="usageRequests">0</div>
+                        <div class="stat-sub">Trong phiên hiện tại</div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- ================= BILLING ================= -->
+            <section class="console-panel" id="billingPanel">
+                <header class="console-topbar">
+                    <div class="console-topbar-text">
+                        <h1>Billing</h1>
+                        <p>Gói dịch vụ &amp; số dư</p>
+                    </div>
+                </header>
+                <section class="console-card billing-card">
+                    <dl class="account-list">
+                        <div>
+                            <dt>Balance</dt>
+                            <dd id="billBalance">—</dd>
+                        </div>
+                        <div>
+                            <dt>Credits Remaining</dt>
+                            <dd id="billCredits">—</dd>
+                        </div>
+                        <div>
+                            <dt>Status</dt>
+                            <dd id="billStatus"><span class="badge badge-ok">—</span></dd>
+                        </div>
+                        <div>
+                            <dt>Plan</dt>
+                            <dd id="billPlan">—</dd>
+                        </div>
+                    </dl>
+                </section>
+            </section>
+
+            <!-- ================= SETTINGS ================= -->
+            <section class="console-panel" id="settingsPanel">
+                <header class="console-topbar">
+                    <div class="console-topbar-text">
+                        <h1>Settings</h1>
+                        <p>Tùy chọn giao diện &amp; tài khoản</p>
+                    </div>
+                </header>
+                <section class="console-card">
+                    <div class="settings-row">
+                        <div><strong>Theme</strong><span>Chuyển sáng / tối</span></div>
+                        <button type="button" class="console-btn" id="settingsThemeBtn">Đổi theme</button>
+                    </div>
+                    <div class="settings-row">
+                        <div><strong>Đăng xuất</strong><span>Thoát khỏi tài khoản hiện tại</span></div>
+                        <button type="button" class="console-btn console-btn-danger" id="settingsLogoutBtn">Đăng
+                            xuất</button>
+                    </div>
+                </section>
+            </section>
+
+            <!-- ================= PROFILE ================= -->
+            <section class="console-panel" id="profilePanel">
+                <section id="profileErrorState" class="profile-state hidden" aria-live="polite">
+                    <div>
+                        <h2>Không thể tải hồ sơ</h2>
+                        <p id="profileErrorMessage">Đã có lỗi xảy ra khi tải dữ liệu tài khoản.</p>
+                    </div>
+                    <button type="button" class="console-btn" id="profileRetryBtn">Thử lại</button>
+                </section>
+
+                <section id="profileSkeleton" class="profile-skeleton" aria-hidden="true">
+                    <div class="console-card skeleton-hero"></div>
+                    <div class="skeleton-stat-grid">
+                        <div class="console-card skeleton-stat"></div>
+                        <div class="console-card skeleton-stat"></div>
+                    </div>
+                </section>
+
+                <div id="profileContent" class="profile-content hidden">
+                    <section class="console-card profile-hero-card">
+                        <div class="profile-hero-main">
+                            <div class="profile-avatar-stack">
+                                <div class="profile-avatar" id="profileHeroAvatar">AI</div>
+                                <span class="profile-presence-dot" aria-hidden="true"></span>
+                            </div>
+                            <div class="profile-hero-copy">
+                                <div class="profile-badge-row">
+                                    <span class="profile-kicker">Workspace identity</span>
+                                    <span id="profileDataModeBadge" class="profile-chip profile-chip-muted">Live
+                                        data</span>
+                                </div>
+                                <h2 id="profileDisplayName">Người dùng AI STORE</h2>
+                                <p id="profileUsername" class="profile-username">@workspace</p>
+                                <div class="profile-hero-meta">
+                                    <a id="profileEmailLink" class="profile-meta-link"
+                                        href="mailto:workspace@example.com">workspace@example.com</a>
+                                    <span id="profileJoinedText">Joined 01/06/2026</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="profile-hero-side">
+                            <article class="profile-mini-panel">
+                                <span class="profile-mini-label">Current Plan</span>
+                                <strong id="profilePlanText">Pro</strong>
+                                <small id="profileBillingCycleText">Monthly billing</small>
+                            </article>
+                            <article class="profile-mini-panel">
+                                <span class="profile-mini-label">Account Status</span>
+                                <strong id="profileStatusText">Active</strong>
+                                <small id="profileLastSeenText">Seen 2 minutes ago</small>
+                            </article>
+                        </div>
+                    </section>
+
+                    <section class="profile-layout-grid">
+                        <article class="console-card profile-card profile-account-card">
+                            <div class="profile-card-heading">
+                                <div><span class="profile-section-kicker">Account Information</span>
+                                    <h3>Thông tin tài khoản</h3>
+                                </div>
+                            </div>
+                            <div id="profileAccountDetails" class="profile-detail-grid"></div>
+                        </article>
+
+                        <article class="console-card profile-card">
+                            <div class="profile-card-heading">
+                                <div><span class="profile-section-kicker">Security</span>
+                                    <h3>Bảo mật tài khoản</h3>
+                                </div>
+                            </div>
+                            <div id="profileSecuritySummary" class="profile-stack"></div>
+                            <div class="profile-subsection">
+                                <div class="profile-subsection-head">
+                                    <h4>Thiết bị đăng nhập</h4>
+                                    <span id="profileDeviceCount" class="profile-chip profile-chip-muted">0 thiết
+                                        bị</span>
+                                </div>
+                                <div id="profileDeviceList" class="profile-device-list"></div>
+                            </div>
+                        </article>
+
+                        <article class="console-card profile-card">
+                            <div class="profile-card-heading">
+                                <div><span class="profile-section-kicker">Recent Activity</span>
+                                    <h3>Hoạt động gần đây</h3>
+                                </div>
+                            </div>
+                            <ol id="profileActivityList" class="profile-activity-list"></ol>
+                        </article>
+                    </section>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <div id="profileToastStack" class="profile-toast-stack" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- Key form modal -->
+    <div class="rh-modal" id="keyModal" hidden>
+        <div class="rh-modal-card key-modal-card" role="dialog" aria-modal="true">
+            <div class="rh-modal-head">
+                <h3 id="keyModalTitle">Thêm API Key</h3><button type="button" class="rh-modal-close" id="keyModalClose"
+                    aria-label="Đóng">×</button>
+            </div>
+            <div class="key-form">
+                <label class="key-field"><span>API Endpoint (url) *</span><input type="text" id="keyFieldUrl"
+                        placeholder="http://160.187.247.86:3000/v1" autocomplete="off" spellcheck="false" /></label>
+                <label class="key-field"><span>Token *</span><input type="text" id="keyFieldToken" placeholder="sk-..."
+                        autocomplete="off" spellcheck="false" /></label>
+                <label class="key-field"><span>Model</span><input type="text" id="keyFieldModel"
+                        placeholder="nex-agi/nex-n2-pro:free" autocomplete="off" spellcheck="false" /></label>
+                <label class="key-field" id="keyFieldEffortWrap" hidden>
+                    <span>Effort</span>
+                    <select id="keyFieldEffort">
+                        <option value="minimal">minimal</option>
+                        <option value="low">low</option>
+                        <option value="medium">medium</option>
+                        <option value="high">high</option>
+                        <option value="xhigh">xhigh</option>
+                    </select>
+                </label>
+                <label class="key-field">
+                    <span>Mode</span>
+                    <select id="keyFieldMode">
+                        <option value="auto">Auto</option>
+                        <option value="codex">Codex</option>
+                        <option value="claude">Claude</option>
+                    </select>
+                </label>
+                <div class="key-form-error" id="keyFormError" hidden></div>
+                <div class="key-form-actions">
+                    <button type="button" class="console-btn" id="keyFormCancel">Hủy</button>
+                    <button type="button" class="console-btn console-btn-primary" id="keyFormSave">Xong</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JSON detail modal -->
+    <div class="rh-modal" id="rhModal" hidden>
+        <div class="rh-modal-card" role="dialog" aria-modal="true">
+            <div class="rh-modal-head">
+                <h3 id="rhModalTitle">Chi tiết request</h3><button type="button" class="rh-modal-close"
+                    id="rhModalClose" aria-label="Đóng">×</button>
+            </div>
+            <pre class="rh-modal-body" id="rhModalBody"></pre>
+        </div>
+    </div>
+
+    <div class="rh-modal pg-image-preview-modal" id="pgImagePreviewModal" hidden>
+        <div class="rh-modal-card pg-image-preview-card" role="dialog" aria-modal="true">
+            <div class="rh-modal-head">
+                <h3 id="pgImagePreviewTitle">Ảnh đã gửi</h3><button type="button" class="rh-modal-close"
+                    id="pgImagePreviewClose" aria-label="Đóng">×</button>
+            </div>
+            <div class="pg-image-preview-body">
+                <img id="pgImagePreviewImg" class="pg-image-preview-img" alt="Ảnh đã gửi" />
+            </div>
+        </div>
+    </div>
+
+    <div class="rh-modal pg-file-preview-modal" id="pgFilePreviewModal" hidden>
+        <div class="rh-modal-card pg-file-preview-card" role="dialog" aria-modal="true">
+            <div class="rh-modal-head">
+                <div class="pg-file-preview-headtext">
+                    <h3 id="pgFilePreviewTitle">Xem file trước khi gửi</h3>
+                    <div class="pg-file-preview-meta" id="pgFilePreviewMeta">—</div>
+                </div>
+                <button type="button" class="rh-modal-close" id="pgFilePreviewClose" aria-label="Đóng">×</button>
+            </div>
+            <div class="pg-file-preview-warning" id="pgFilePreviewWarning" hidden></div>
+            <pre class="pg-file-preview-body" id="pgFilePreviewBody"></pre>
+        </div>
+    </div>
+
+    <script src="/js/state.js"></script>
+    <script src="../js/model-metadata.js"></script>
+    <script src="../js/models.js"></script>
+    <script src="../js/login.js"></script>
+    <script src="../js/profile.js"></script>
+    <script src="../js/dashboard.js"></script>
+    <script src="/js/app.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', async () => {
+            // Login state comes from the server session (SQL)
+            await window.AppState.ready;
+            if (!window.AppState.isLoggedIn()) {
+                window.location.href = '/login';
+                return;
+            }
+            if (typeof window.refreshDashboardRefs === 'function') window.refreshDashboardRefs();
+            if (typeof window.initConsole === 'function') window.initConsole();
+            if (typeof window.hydrateDashboard === 'function') await window.hydrateDashboard();
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,80 @@
+<section class="models-app" id="modelsSection">
+    <header class="models-topbar">
+        <div class="models-heading">
+            <h1>Models</h1>
+            <p>Mô hình khả dụng từ các nhà cung cấp AI</p>
+        </div>
+
+        <div class="models-controls">
+            <div class="models-search">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="11" cy="11" r="7"></circle>
+                    <path d="M21 21l-4.3-4.3"></path>
+                </svg>
+                <input id="modelsSearchInput" type="search" autocomplete="off" spellcheck="false" placeholder="Tìm model, provider, type..." />
+            </div>
+
+            <div class="models-select-wrap">
+                <select id="modelsProviderFilter" class="models-select" aria-label="Lọc theo provider">
+                    <option value="all">Tất cả provider</option>
+                </select>
+            </div>
+
+            <div class="models-select-wrap">
+                <select id="modelsTypeFilter" class="models-select" aria-label="Lọc theo loại">
+                    <option value="all">Tất cả loại</option>
+                </select>
+            </div>
+
+            <div class="models-select-wrap">
+                <select id="modelsSortSelect" class="models-select" aria-label="Sắp xếp">
+                    <option value="name-asc">Tên A → Z</option>
+                    <option value="name-desc">Tên Z → A</option>
+                    <option value="provider">Provider</option>
+                    <option value="context-desc">Context lớn nhất</option>
+                </select>
+            </div>
+
+            <button type="button" class="models-icon-btn" id="modelsRefreshButton" aria-label="Làm mới" title="Làm mới">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M21 12a9 9 0 1 1-2.64-6.36"></path>
+                    <path d="M21 3v5h-5"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <div class="models-statsbar">
+        <span class="stat"><strong id="modelsTotalCount">0</strong> Models</span>
+        <span class="sep" aria-hidden="true"></span>
+        <span class="stat"><strong id="modelsProviderCount">0</strong> Providers</span>
+        <span class="sep" aria-hidden="true"></span>
+        <span class="stat muted" id="modelsUpdatedAt">—</span>
+    </div>
+
+    <div class="models-table-card">
+        <div class="models-table" role="table" aria-label="Danh sách model">
+            <div class="models-thead" role="row">
+                <div class="col-model" role="columnheader">Model</div>
+                <div class="col-provider" role="columnheader">Provider</div>
+                <div class="col-type" role="columnheader">Type</div>
+                <div class="col-caps" role="columnheader">Capabilities</div>
+                <div class="col-ctx" role="columnheader">Context</div>
+                <div class="col-status" role="columnheader">Status</div>
+                <div class="col-actions" role="columnheader">Action</div>
+            </div>
+            <div class="models-tbody" id="modelsSectionTable" role="rowgroup"></div>
+        </div>
+
+        <div class="models-state" id="modelsSectionStatus" hidden></div>
+    </div>
+
+    <footer class="models-footer">
+        <div class="models-range" id="modelsRangeInfo"></div>
+        <div class="models-pager">
+            <button type="button" id="modelsPrevPage" aria-label="Trang trước">‹</button>
+            <span id="modelsPageIndicator">1 / 1</span>
+            <button type="button" id="modelsNextPage" aria-label="Trang sau">›</button>
+        </div>
+    </footer>
+</section>

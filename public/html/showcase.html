@@ -1,0 +1,41 @@
+<div class="showcase-wrap" id="showcaseMountRoot">
+    <div class="hero-showcase glass-card">
+        <div class="showcase-topbar">
+            <div class="hero-chip-row align-left" id="showcaseTabs">
+                <button type="button" class="hero-chip" data-showcase-tab="chat">Chat</button>
+                <button type="button" class="hero-chip active" data-showcase-tab="responses">Responses</button>
+                <button type="button" class="hero-chip" data-showcase-tab="claude">Claude</button>
+                <button type="button" class="hero-chip" data-showcase-tab="gemini">Gemini</button>
+            </div>
+            <div class="showcase-meta" id="showcaseMeta">JSON SSE</div>
+        </div>
+
+        <div class="showcase-path-row">
+            <span class="method-pill" id="showcaseMethod">POST</span>
+            <span class="endpoint-pill" id="showcaseEndpoint">/v1/responses</span>
+        </div>
+
+        <div class="hero-code-window large-window">
+            <div class="code-section-label" id="showcaseRequestLabel">REQUEST</div>
+            <pre class="code-block themed-code" id="showcaseRequestCode">curl -X POST "/v1/responses" \
+  -H "Authorization: Bearer sk-******" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "your-model",
+    "input": "..."
+  }'</pre>
+
+            <div class="code-section-label response-label" id="showcaseResponseLabel">RESPONSE</div>
+            <pre class="code-block themed-code" id="showcaseResponseCode">{
+  "output": [{ "type": "output_text", "text": "Response workflow ready." }],
+  "usage": { "total_tokens": 31 }
+}</pre>
+        </div>
+
+        <div class="showcase-footer" id="showcaseFooter">
+            <span>2381 MS</span>
+            <span>31 TOKENS</span>
+            <span>STREAM • SSE</span>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI STORE</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/showcase.css" />
+    <link rel="stylesheet" href="/css/dashboard.css" />
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <div class="brand brand-linklike">
+                <img class="brand-logo" src="/AI_STORE.png" alt="AI STORE logo" />
+                <div>
+                    <div class="brand-kicker" data-i18n="brandKicker">AI STORE</div>
+                    <div class="brand-name" data-i18n="brandName">AI STORE</div>
+                </div>
+            </div>
+
+            <nav class="site-nav">
+                <a href="/" data-i18n="navHome">Trang chủ</a>
+                <a href="javascript:void(0)" onclick="goToConsole()" data-i18n="navConsole">Bảng điều khiển</a>
+                <a href="/models" data-i18n="navModels">Mô hình</a>
+                <a href="/rankings" data-i18n="navRanking">Bảng xếp hạng</a>
+                <a href="/docs" data-i18n="navDocs">Tài liệu</a>
+            </nav>
+
+            <div class="header-actions">
+                <div class="language-switcher">
+                    <button class="ghost-icon-btn" id="languageToggle" type="button" aria-haspopup="true"
+                        aria-expanded="false">文</button>
+                    <div class="language-menu hidden" id="languageMenu">
+                        <button type="button" data-lang="vi">Tiếng Việt</button>
+                        <button type="button" data-lang="en">English</button>
+                        <button type="button" data-lang="zh">中文</button>
+                        <button type="button" data-lang="ja">日本語</button>
+                    </div>
+                </div>
+                <div class="theme-switcher">
+                    <button class="ghost-icon-btn svg-icon-btn" id="themeToggle" type="button" aria-haspopup="true"
+                        aria-expanded="false" aria-label="Theme switcher">
+                        <span class="theme-icon theme-icon-moon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"></path>
+                            </svg>
+                        </span>
+                        <span class="theme-icon theme-icon-sun" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="4"></circle>
+                                <path d="M12 2v2.5"></path>
+                                <path d="M12 19.5V22"></path>
+                                <path d="M4.93 4.93l1.77 1.77"></path>
+                                <path d="M17.3 17.3l1.77 1.77"></path>
+                                <path d="M2 12h2.5"></path>
+                                <path d="M19.5 12H22"></path>
+                                <path d="M4.93 19.07l1.77-1.77"></path>
+                                <path d="M17.3 6.7l1.77-1.77"></path>
+                            </svg>
+                        </span>
+                    </button>
+                    <div class="theme-menu hidden" id="themeMenu">
+                        <button type="button" data-theme="dark" data-i18n="themeDark">Tối</button>
+                        <button type="button" data-theme="light" data-i18n="themeLight">Ánh Sáng</button>
+                    </div>
+                </div>
+                <div class="notification-switcher">
+                    <button class="ghost-icon-btn svg-icon-btn" id="notificationToggle" type="button"
+                        aria-haspopup="true" aria-expanded="false" aria-label="Notifications">
+                        <span class="notification-dot"></span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M15 17h5l-1.4-1.4A2 2 0 0 1 18 14.2V11a6 6 0 1 0-12 0v3.2a2 2 0 0 1-.6 1.4L4 17h5">
+                            </path>
+                            <path d="M9 17a3 3 0 0 0 6 0"></path>
+                        </svg>
+                    </button>
+                    <div class="notification-menu hidden" id="notificationMenu">
+                        <div class="notification-header">
+                            <span data-i18n="notificationHeader">Thông báo</span>
+                            <span class="notification-count">01</span>
+                        </div>
+                        <article class="notification-card">
+                            <div class="notification-tag" data-i18n="notificationTag">Welcome</div>
+                            <h4 data-i18n="notificationTitle">Chào mừng bạn đến với AI STORE</h4>
+                            <p data-i18n="notificationDescription">
+                                Hệ thống đã sẵn sàng để bạn khám phá dashboard, theo dõi balance, quản lý model và xây
+                                dựng trải nghiệm AI gọn gàng hơn trong một nơi duy nhất.
+                            </p>
+                            <div class="notification-time" data-i18n="notificationTime">Vừa xong · curated for your
+                                workspace</div>
+                        </article>
+                    </div>
+                </div>
+                <button class="nav-login-btn" id="loginTriggerBtn" type="button" onclick="showLoginPanel()"
+                    data-i18n="signIn">Đăng nhập</button>
+                <div class="user-menu-wrap hidden" id="userMenuWrap">
+                    <button class="user-menu-trigger" id="userMenuTrigger" type="button" aria-haspopup="true"
+                        aria-expanded="false" aria-label="User menu">
+                        <span class="user-avatar" id="userAvatar">AI</span>
+                        <span class="user-meta">
+                            <strong id="userDisplayName">Người dùng</strong>
+                            <small id="userDisplayPlan">Tài khoản hệ thống</small>
+                        </span>
+                    </button>
+                    <div class="user-menu-dropdown hidden" id="userMenuDropdown" role="menu">
+                        <button class="user-menu-item" type="button" role="menuitem" data-user-action="profile">
+                            <svg class="user-menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-6 8-6s8 2 8 6"/></svg>
+                            <span data-i18n="navProfile">Hồ sơ</span>
+                        </button>
+                        <button class="user-menu-item user-menu-item-danger" type="button" role="menuitem" data-user-action="logout">
+                            <svg class="user-menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4H5a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h4"/><path d="M16 8l4 4-4 4"/><path d="M20 12H9"/></svg>
+                            <span data-i18n="navLogout">Đăng xuất</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="page-shell">
+        <section class="hero-section centered-hero">
+            <div class="hero-copy hero-copy-centered">
+                <div class="eyebrow subtle" data-i18n="heroEyebrow">Nền tảng API hợp nhất</div>
+                <h1>
+                    <span data-i18n="heroTitleLine1">Cổng API thống nhất cho</span><br />
+                    <span data-i18n="heroTitleLine2">Tất cả mô hình AI của bạn</span>
+                </h1>
+                <p data-i18n="heroDescription">
+                    Vận hành ứng dụng AI, quản lý tài sản số, kết nối tương lai.
+                </p>
+
+                <div class="hero-actions single-action center">
+                    <button class="primary-btn dashboard-btn" type="button" onclick="goToConsole()">
+                        <span data-i18n="heroPrimaryCta">Truy cập Dashboard</span> <span>→</span>
+                    </button>
+                </div>
+            </div>
+
+            <div id="showcaseMount"></div>
+        </section>
+
+        <section class="section-block compact-features">
+            <div class="feature-grid feature-grid-4">
+                <article class="glass-card feature-card reveal-card stagger-1">
+                    <h3 data-i18n="feature1Title">Tốc độ cao</h3>
+                    <p data-i18n="feature1Desc">Tối ưu hạ tầng mạng để phản hồi nhanh cho các luồng AI production.</p>
+                </article>
+                <article class="glass-card feature-card reveal-card stagger-2">
+                    <h3 data-i18n="feature2Title">An toàn &amp; ổn định</h3>
+                    <p data-i18n="feature2Desc">Bảo mật nhiều lớp cùng khả năng kiểm soát quyền truy cập rõ ràng.</p>
+                </article>
+                <article class="glass-card feature-card reveal-card stagger-3">
+                    <h3 data-i18n="feature3Title">Đa mô hình</h3>
+                    <p data-i18n="feature3Desc">Kết nối nhiều nhà cung cấp mô hình thông qua một cổng API thống nhất.
+                    </p>
+                </article>
+                <article class="glass-card feature-card reveal-card stagger-4">
+                    <h3 data-i18n="feature4Title">Dễ mở rộng</h3>
+                    <p data-i18n="feature4Desc">Theo dõi usage, chi phí và hiệu năng để mở rộng hệ thống thuận tiện hơn.
+                    </p>
+                </article>
+            </div>
+        </section>
+
+        <section class="section-block stats-section">
+            <div class="section-heading center-heading reveal-card">
+                <div class="section-icon-badge" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M4 19V9"></path>
+                        <path d="M10 19V5"></path>
+                        <path d="M16 19v-7"></path>
+                        <path d="M22 19v-3"></path>
+                    </svg>
+                </div>
+                <span data-i18n="statsEyebrow">Thống kê nổi bật</span>
+                <h2 data-i18n="statsTitle">Một lớp gateway duy nhất cho toàn bộ hệ sinh thái AI của bạn</h2>
+                <p data-i18n="statsDescription">Tập trung request, quản trị access và tối ưu chi phí sử dụng trong cùng
+                    một bề mặt vận hành.</p>
+            </div>
+
+            <div class="stats-grid stats-grid-3">
+                <article class="glass-card stat-card large-stat reveal-card">
+                    <div class="card-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M5 12.55a7 7 0 1 1 14 0c0 3.19-2.2 5.9-5.15 6.68L12 22l-1.85-2.77A6.99 6.99 0 0 1 5 12.55Z">
+                            </path>
+                            <path d="M12 9v4"></path>
+                            <path d="M12 16h.01"></path>
+                        </svg>
+                    </div>
+                    <strong class="count-up" data-count-type="decimal" data-count-target="99.95"
+                        data-count-suffix="%">0%</strong>
+                    <span data-i18n="stat1Title">Độ sẵn sàng hệ thống</span>
+                    <p data-i18n="stat1Desc">Hạ tầng được tối ưu để duy trì độ ổn định cao cho các dịch vụ AI quan
+                        trọng.</p>
+                </article>
+                <article class="glass-card stat-card large-stat reveal-card">
+                    <div class="card-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 3l7 4v10l-7 4-7-4V7l7-4Z"></path>
+                            <path d="M12 7v10"></path>
+                            <path d="m8.5 9 7 4"></path>
+                            <path d="m15.5 9-7 4"></path>
+                        </svg>
+                    </div>
+                    <strong class="count-up" data-count-type="integer" data-count-target="120"
+                        data-count-suffix="+">0+</strong>
+                    <span data-i18n="stat2Title">Mô hình có thể kết nối</span>
+                    <p data-i18n="stat2Desc">Hỗ trợ nhiều upstream models và workflows dưới một điểm truy cập thống
+                        nhất.</p>
+                </article>
+                <article class="glass-card stat-card large-stat reveal-card">
+                    <div class="card-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 6v6l4 2"></path>
+                            <path d="M21 12a9 9 0 1 1-3.17-6.88"></path>
+                        </svg>
+                    </div>
+                    <strong class="count-up" data-count-type="fraction" data-count-target="24/7">0/0</strong>
+                    <span data-i18n="stat3Title">Giám sát lưu lượng</span>
+                    <p data-i18n="stat3Desc">Theo dõi tiêu thụ token, chi phí và hiệu năng theo thời gian thực.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="section-block steps-section">
+            <div class="section-heading center-heading reveal-card">
+                <div class="section-icon-badge" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M8 6h13"></path>
+                        <path d="M8 12h13"></path>
+                        <path d="M8 18h13"></path>
+                        <path d="M3 6h.01"></path>
+                        <path d="M3 12h.01"></path>
+                        <path d="M3 18h.01"></path>
+                    </svg>
+                </div>
+                <span data-i18n="stepsEyebrow">Quy trình sử dụng</span>
+                <h2 data-i18n="stepsTitle">Bắt đầu nhanh với 3 bước đơn giản</h2>
+            </div>
+
+            <div class="steps-grid">
+                <article class="glass-card step-card reveal-card stagger-1">
+                    <div class="step-number">01</div>
+                    <h3 data-i18n="step1Title">Cấu hình</h3>
+                    <p data-i18n="step1Desc">Thêm API key, thiết lập upstream và tạo môi trường truy cập phù hợp cho
+                        team của bạn.</p>
+                </article>
+                <article class="glass-card step-card reveal-card stagger-2">
+                    <div class="step-number">02</div>
+                    <h3 data-i18n="step2Title">Kết nối</h3>
+                    <p data-i18n="step2Desc">Sử dụng route API tương thích để tích hợp nhanh vào ứng dụng, agent hoặc
+                        backend hiện tại.</p>
+                </article>
+                <article class="glass-card step-card reveal-card stagger-3">
+                    <div class="step-number">03</div>
+                    <h3 data-i18n="step3Title">Theo dõi</h3>
+                    <p data-i18n="step3Desc">Quan sát balance, usage, logs và hiệu quả tiêu thụ tài nguyên ngay trong
+                        dashboard.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="section-block usecases-section">
+            <div class="section-heading center-heading reveal-card">
+                <div class="section-icon-badge" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path
+                            d="M4 8.5A2.5 2.5 0 0 1 6.5 6H9l1.4 2h7.1A2.5 2.5 0 0 1 20 10.5v6A2.5 2.5 0 0 1 17.5 19h-11A2.5 2.5 0 0 1 4 16.5v-8Z">
+                        </path>
+                        <path d="M12 11v5"></path>
+                        <path d="M9.5 13.5h5"></path>
+                    </svg>
+                </div>
+                <span data-i18n="usecasesEyebrow">Tình huống sử dụng</span>
+                <h2 data-i18n="usecasesTitle">Xây dựng nhanh hơn cho nhiều loại sản phẩm AI</h2>
+            </div>
+
+            <div class="feature-grid feature-grid-3">
+                <article class="glass-card feature-card usecase-card reveal-card stagger-1">
+                    <div class="card-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 18h6"></path>
+                            <path d="M10 22h4"></path>
+                            <path d="M12 2a7 7 0 0 0-4 12.74V16a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2v-1.26A7 7 0 0 0 12 2Z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 data-i18n="usecase1Title">AI Chat Applications</h3>
+                    <p data-i18n="usecase1Desc">Tạo chatbot, trợ lý ảo và giao diện hội thoại với khả năng chuyển mô
+                        hình linh hoạt.</p>
+                </article>
+                <article class="glass-card feature-card usecase-card reveal-card stagger-2">
+                    <div class="card-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="4" y="4" width="7" height="7" rx="2"></rect>
+                            <rect x="13" y="4" width="7" height="7" rx="2"></rect>
+                            <rect x="4" y="13" width="7" height="7" rx="2"></rect>
+                            <path d="M16.5 13v7"></path>
+                            <path d="M13 16.5h7"></path>
+                        </svg>
+                    </div>
+                    <h3 data-i18n="usecase2Title">Automation Workflows</h3>
+                    <p data-i18n="usecase2Desc">Kết nối nhiều mô hình cho pipeline xử lý dữ liệu, tóm tắt, phân loại và
+                        tạo nội dung.</p>
+                </article>
+                <article class="glass-card feature-card usecase-card reveal-card stagger-3">
+                    <div class="card-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                            stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                    </div>
+                    <h3 data-i18n="usecase3Title">Team AI Platform</h3>
+                    <p data-i18n="usecase3Desc">Cung cấp một điểm truy cập chung để đội ngũ dùng AI an toàn, có kiểm
+                        soát và dễ quản trị.</p>
+                </article>
+            </div>
+        </section>
+        </main>
+
+        <footer class="site-footer minimal-footer">
+            <div class="footer-left">
+                <div class="brand footer-brand">
+                    <img class="brand-logo" src="/AI_STORE.png" alt="AI STORE logo" />
+                    <div>
+                        <div class="brand-kicker" data-i18n="footerBrandKicker">AI STORE</div>
+                        <div class="brand-name" data-i18n="footerBrandName">AI STORE</div>
+                    </div>
+                </div>
+                <a href="#" data-i18n="privacyPolicy">Privacy Policy</a>
+            </div>
+            <div class="footer-right">
+                <a href="#" data-i18n="footerRight">AI STORE</a>
+            </div>
+        </footer>
+    </div>
+
+    <div id="loginMount"></div>
+
+    <div id="dashboardMount"></div>
+
+    <script src="/js/state.js"></script>
+    <script src="/js/showcase.js"></script>
+    <script src="/js/login.js"></script>
+    <script src="/js/models.js"></script>
+    <script src="/js/dashboard.js"></script>
+    <script src="/js/translations.js"></script>
+    <script src="/js/app.js"></script>
+</body>
+
+</html>
